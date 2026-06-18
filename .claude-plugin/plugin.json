@@ -1,0 +1,14 @@
+{
+  "name": "praxis",
+  "version": "0.1.0",
+  "description": "The natural scientist's harness for Claude. Turns Claude into a team of scientists that run the full scientific method over real data — paper reader, domain expert, analyst-coder, skeptic, interpreter, teacher, next-steps planner. Ships Siren, a flagship gravitational-wave domain pack built on real GWOSC data.",
+  "author": "polygrav",
+  "license": "MIT",
+  "keywords": [
+    "science", "scientific-method", "data-driven-science", "research",
+    "gravitational-waves", "gwosc", "simulation-based-inference", "agents"
+  ],
+  "agents": "agents/",
+  "skills": "skills/",
+  "commands": "commands/"
+}

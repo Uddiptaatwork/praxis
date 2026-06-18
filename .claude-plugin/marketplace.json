@@ -1,0 +1,11 @@
+{
+  "name": "praxis",
+  "owner": "polygrav",
+  "plugins": [
+    {
+      "name": "praxis",
+      "source": "./",
+      "description": "Everything-Claude-Code for data-driven natural science. A team of scientist-agents that run the scientific method end to end, with a flagship gravitational-wave pack (Siren) over real GWOSC data."
+    }
+  ]
+}

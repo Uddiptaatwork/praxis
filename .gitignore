@@ -1,0 +1,63 @@
+# ── Secrets & credentials (never commit) ─────────────────────────
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.json
+credentials.json
+.anthropic
+.claude.json
+*api_key*
+*API_KEY*
+
+# ── GW data — fetch from GWOSC at runtime, don't commit ───────────
+data/
+strain/
+*.hdf5
+*.h5
+*.gwf
+*.txt.gz
+cache/
+*.cache
+
+# ── Analysis / PE outputs (large, regenerable) ───────────────────
+outdir/
+outputs/
+results/
+posterior_samples/
+*.dat
+*.pkl
+*.npy
+*.npz
+checkpoints/
+*.ckpt
+*.pt
+*.pth
+corner_*.png
+*_posterior.png
+
+# ── Python ───────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ── Node (if you add tooling later) ──────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# ── OS / editor ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
