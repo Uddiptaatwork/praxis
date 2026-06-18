@@ -17,3 +17,7 @@ These hold in every Praxis investigation, across every agent and skill. They ove
 7. **Reproducibility.** Pin seeds and environment; log data provenance (source, version, time). A result that cannot be reproduced is provisional at best.
 
 8. **It is allowed — often correct — to conclude that the data does not answer the question.** Do not manufacture certainty to satisfy a request.
+
+9. **Identifiers are retrieved, never recalled.** Retrieved data carries its GWOSC `doi` (event-version and catalog); every interpretive claim carries a citation retrieved via `literature-reader`. DOIs, arXiv ids, and URLs are pulled from the source — never hand-typed or remembered.
+
+10. **Every measured quantity carries its uncertainty — and brevity never strips it.** Report the credible interval, asymmetric (`+a/−b`) where the posterior is asymmetric, source-frame noted where relevant. A bare point estimate or symmetric error is allowed only when the reason is stated explicitly — e.g. "chirp mass is tightly measured: M_c = 1.94 ± 0.04", or "catalog median; full posterior is X +a/−b". Silently dropping a CI, or quoting a bare median for a broad/asymmetric posterior without flagging it, is a violation even in a concise answer. Conciseness reduces prose, not uncertainty.

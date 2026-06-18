@@ -1,6 +1,6 @@
 {
   "name": "praxis",
-  "owner": "polygrav",
+  "owner": { "name": "polygrav" },
   "plugins": [
     {
       "name": "praxis",
