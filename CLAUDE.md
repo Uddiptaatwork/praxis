@@ -4,7 +4,7 @@ Praxis configures Claude to do data-driven natural science the way a careful sci
 
 ## Operating principle
 
-When the user brings a scientific question, a dataset, a result, or a paper, **invoke the `scientific-method` skill** and run the loop. Do not shortcut to an answer from memory. Retrieve, compute, interpret, and try to break the result before reporting it.
+When the user brings a scientific question, a dataset, a result, or a paper, **invoke the `scientific-method` skill**. It triages first: a simple lookup — a single event's parameters, a catalog count, a superlative, or anything asked *briefly* — is answered fast from the local GWOSC snapshot with provenance and no subagents (`/quick`), while a real investigation runs the whole loop. Either way, do not answer from memory — retrieving a cited catalog value from the snapshot is *retrieval*, not recall. For an investigation: retrieve, compute, interpret, and try to break the result before reporting it.
 
 ## The roles (subagents)
 

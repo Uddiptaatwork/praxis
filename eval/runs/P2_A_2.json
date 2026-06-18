@@ -1,0 +1,12 @@
+{
+  "status": "ok",
+  "output_tokens": 1904,
+  "duration_ms": 39036,
+  "total_cost_usd": 0.054428500000000005,
+  "is_error": false,
+  "subtype": "success",
+  "num_turns": 3,
+  "session_id": "f74b9786-bac4-4b2c-a4b2-5597b8bf426d",
+  "returncode": 0,
+  "wall_s": 39.817233085632324
+}

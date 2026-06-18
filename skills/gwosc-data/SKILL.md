@@ -7,6 +7,40 @@ description: How to fetch real gravitational-wave data from the LVK / GWOSC publ
 
 The Gravitational Wave Open Science Center hosts the public LVK data. The v2 API is public, requires no authentication, and is CORS-enabled (fetchable from a browser app or `curl` or the `gwosc` Python client). Always retrieve real values here rather than recalling them.
 
+## Local snapshot first (the fast path) — use this before any live call
+
+A frozen mirror of the cumulative `GWTC` catalog ships at `skills/gwosc-data/data/gwtc_snapshot.json` (all 391 events: catalog-level parameters with asymmetric errors, per-catalog DOIs, and a `retrieved_utc` timestamp). It is **retrieved data with provenance, not recalled values** — so it satisfies the integrity rules ("retrieve, don't recall"; "identifiers are retrieved"). Catalog data changes *only* when a new GWTC release is published, so the snapshot answers the overwhelming majority of questions with **zero network calls and in seconds** — no paging, no summarizing fetch.
+
+For any single-event lookup, count, or superlative, call the query helper. It prints `best +upper/-lower` with units and provenance (catalog + DOI + snapshot date):
+
+```bash
+python skills/gwosc-data/query_snapshot.py event GW150914           # one event's parameters
+python skills/gwosc-data/query_snapshot.py count                    # cumulative event count
+python skills/gwosc-data/query_snapshot.py count --catalog GWTC-5.0
+python skills/gwosc-data/query_snapshot.py max total_mass_source    # most massive (cumulative)
+python skills/gwosc-data/query_snapshot.py max total_mass_source --catalog GWTC-5.0
+python skills/gwosc-data/query_snapshot.py min luminosity_distance  # closest
+python skills/gwosc-data/query_snapshot.py catalogs                 # catalogs + DOIs + counts
+python skills/gwosc-data/query_snapshot.py meta                     # provenance / snapshot age
+```
+
+Natural-language → command:
+- "how big / most massive / heaviest" → `max total_mass_source` (or `max mass_1_source`); "smallest / lightest" → `min total_mass_source`
+- "closest / nearest" → `min luminosity_distance`; "farthest / most distant" → `max luminosity_distance`
+- "loudest / highest-SNR" → `max network_matched_filter_snr`
+- "how many … so far / in total" → `count`; "how many in GWTC-N" → `count --catalog GWTC-N`
+- an event's masses / distance / spins → `event <id>` (accepts aliases like `GW150914`, `GW230529`)
+
+Add `--json` for machine output (analyst-coder). The superlative scope rule below still holds — the helper flags cumulative-vs-release; report both or ask.
+
+**Fall back to the LIVE v2 API only when the snapshot can't answer:**
+- the event isn't in the snapshot (newer than `retrieved_utc`) — the helper exits with code 2 and prints the live URL to use;
+- you need a full posterior or strain (the snapshot holds catalog-level summary params only);
+- a catalog DOI is empty (`GWTC-2.1-confident`, `GWTC-3-confident`) and full per-event provenance is required — one `event-versions/<NAME>-vN` fetch fills it;
+- the user explicitly asks to re-verify against the live catalog.
+
+When you do go live, use `curl` / the `gwosc` client (deterministic) — **not** a summarizing fetch — and never request the same endpoint twice. **Refresh** the snapshot when a new GWTC release is published: `python skills/gwosc-data/build_snapshot.py`.
+
 ## Python client (preferred for analysis)
 
 ```bash
