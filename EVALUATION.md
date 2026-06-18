@@ -6,7 +6,7 @@ generic helpfulness. The two arms differ in only one variable: the plugin.
 
 ![Integrity hexagon: praxis vs vanilla Claude](docs/integrity-hexagon.png)
 
-*Pilot: 12 questions × Haiku × low effort × 2 repeats = 24 paired runs. Larger area = stronger integrity.*
+*24 questions × Haiku × low effort — 60 paired runs, pooled across two machines. Larger area = stronger integrity.*
 
 ---
 
@@ -34,20 +34,25 @@ generic helpfulness. The two arms differ in only one variable: the plugin.
 
 ---
 
-## Results (pilot)
+## Results
 
-Blind judge preferred praxis in **17 of 24** paired runs (vanilla 4, tie 3).
+Objective metrics over **60 paired runs** (24 questions, Haiku / low effort), paired
+praxis − vanilla with 95% bootstrap CI:
 
 | Result | Metrics | Status |
 |---|---|---|
-| **Significant** (95% CI excludes 0) | judge provenance (+0.79), judge uncertainty (+0.46), fabrication avoided (risk 0.50 → 0.00) | praxis better |
-| **Leaning praxis** (CI touches 0) | provenance rate, factual accuracy (0.83 → 1.00), citations | promising, underpowered |
-| **Honest null** | trap handling | wash — vanilla already declines/flags well at this tier |
+| **Significant** (95% CI excludes 0) | provenance (+0.30), uncertainty (+0.25), citations (+0.52), fabrication avoided (risk 0.44 → 0.00) | praxis better |
+| **Leaning praxis** (CI touches 0) | factual accuracy (0.83 → 1.00) | promising |
+| **Honest null** | trap handling (−0.07) | wash — vanilla already declines/flags well at this tier |
 
-**Read honestly:** at the cheapest tier the measurable praxis advantage is **provenance,
-uncertainty, and fabrication-avoidance** — not trap handling, which vanilla already does. The
-factual keys are **retrieved from GWOSC**, never recalled, so factual-accuracy is graded
-against real catalog values.
+**Read honestly:** the measurable praxis advantage is **provenance, uncertainty, citations,
+and fabrication-avoidance** — not trap handling, which vanilla already does at this tier.
+Factual keys are **retrieved from GWOSC**, never recalled, so factual-accuracy is graded
+against real catalog values (new questions with `needs_retrieval` keys are excluded from that
+axis until verified).
+
+*Blind judge (pilot, 24 paired runs) preferred praxis 17 / 24 (vanilla 4, tie 3); not yet
+re-run on the expanded 60-run set.*
 
 ---
 
