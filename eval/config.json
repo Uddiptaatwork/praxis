@@ -1,0 +1,30 @@
+{
+  "_comment": "Eval harness config. Paths are relative to the eval/ directory (this bundle lives at praxis/eval, so the plugin repo root is just '..'). The full grid = questions x arms x models x efforts x repeats; keep it small until a smoke run looks right.",
+
+  "praxis_dir": "..",
+  "rules_file": "../rules/scientific-integrity.md",
+
+  "arms": ["vanilla", "praxis"],
+  "models": ["haiku", "sonnet", "opus"],
+  "efforts": ["low", "high", "max"],
+  "repeats": 3,
+
+  "permission_mode": "bypassPermissions",
+  "timeout_s": 900,
+  "max_workers": 2,
+
+  "smoke": {
+    "models": ["haiku"],
+    "efforts": ["low"],
+    "repeats": 1
+  },
+
+  "judge": {
+    "model": "opus",
+    "runs": 3
+  },
+
+  "classifier": {
+    "model": "haiku"
+  }
+}
