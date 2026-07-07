@@ -26,10 +26,7 @@
 
   "sources": {
     "primary": [
-      { "name": "NANOGrav 15yr", "kind": "zenodo", "doi": "10.5281/zenodo.8423265",
-        "license": "CC-BY-4.0", "access": "dataset-doi",
-        "paper_doi": "10.3847/2041-8213/acdac6", "arxiv": "2306.16213",
-        "source_fetched": "WebFetch https://arxiv.org/abs/2306.16213 (abstract); dataset DOI verified via WebFetch https://zenodo.org/records/8423265 and https://doi.org/10.5281/zenodo.8092551" },
+        "source_fetched": "WebFetch https://arxiv.org/abs/2306.16213 (abstract); dataset DOI verified via WebFetch https://zenodo.org/records/8423265 and https://doi.org/10.5281/zenodo.8423265" },
       { "name": "EPTA DR2", "kind": "zenodo", "doi": "10.5281/zenodo.8091568",
         "license": "CC-BY-4.0", "access": "dataset-doi",
         "paper_doi": "10.1051/0004-6361/202346844", "arxiv": "2306.16214",
