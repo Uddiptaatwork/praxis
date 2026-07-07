@@ -18,7 +18,7 @@
       "Bash(python3 -c \"import json;d=json.load\\(open\\('packs/pta/pack.json'\\)\\);print\\('sota:',json.dumps\\(d.get\\('sota'\\)\\)\\);print\\('oracle:',json.dumps\\(d.get\\('oracle'\\)\\)\\);print\\('corpus_license:',d.get\\('corpus_license'\\)\\)\")",
       "Bash(python3 packs/pta/cache/build.py)",
       "Bash(cp packs/pta/cache/pta_snapshot.json /tmp/pta_run1.json)",
-      "Bash(git rm *)",
+      "Bash(git rm --dry-run -- *)",
       "Bash(python3 lib/pvalidate.py packs/pta)",
       "Bash(python3 lib/memory_prime.py lvk)",
       "Bash(grep -E '^\\\\- \\\\`[a-z-]+\\\\`')",
