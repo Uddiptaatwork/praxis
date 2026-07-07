@@ -14,7 +14,7 @@
 # Requires: claude CLI, jq. Usage: bash eval/run_ab.sh
 set -u
 
-PRAXIS_DIR="/Users/ubhardwaj/work/anthropic-ethai-hackathon/praxis"
+PRAXIS_DIR="${PRAXIS_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)}"
 OUT="/tmp/praxis_eval"
 CLEAN="/tmp/praxis_baseline_clean"
 mkdir -p "$OUT" "$CLEAN"
