@@ -106,7 +106,7 @@ Any superlative query scoped to a named release — "largest / most massive / he
 2. **Report BOTH** — the cumulative-largest and the release-largest — or ask the user which scope they mean.
 3. Never answer a superlative from a single numbered-release subset alone.
 
-Worked example (the right behavior): asked "largest BBH in GWTC-5", report that within GWTC-5.0 it is GW241230_233618 (~116 M☉, O4b), **but** the cumulative-largest in the full `GWTC` is GW231123_135430 (~236 M☉, GWTC-4.1 / O4a) — and surface that the question conflated a run-slice with the catalog.
+Worked example (the right behavior): asked "largest BBH in GWTC-5", report that within GWTC-5.0 it is GW241230_233618 (O4b), **but** the cumulative-largest in the full `GWTC` is GW231123_135430 (GWTC-4.1 / O4a) — and surface that the question conflated a run-slice with the catalog.
 
 ## Provenance rule
 
