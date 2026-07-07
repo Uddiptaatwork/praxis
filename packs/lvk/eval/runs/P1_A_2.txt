@@ -1,0 +1,10 @@
+The WebFetch request was denied, so I'll answer from training knowledge and be explicit about the source.
+
+From the GWOSC event page for GW150914 ([gwosc.org/events/GW150914/](https://gwosc.org/events/GW150914/)), which draws on the GWTC-1 catalog (Abbott et al. 2019, *Phys. Rev. X* 9, 031040), the **source-frame component masses** at 90% credible intervals are:
+
+| Parameter | Value |
+|-----------|-------|
+| Primary mass *m*₁ | **35.6 +4.7/−3.0 M☉** |
+| Secondary mass *m*₂ | **30.6 +3.0/−4.4 M☉** |
+
+**Caveat:** I was unable to live-fetch the GWOSC page (permission not granted), so these figures come from my training data. GWOSC has updated parameter estimates over catalog releases (GWTC-1, -2, -3), and the numbers on the page today may differ slightly depending on which waveform model or catalog version is displayed. I'd recommend verifying directly at gwosc.org/events/GW150914/ to confirm the current canonical values.

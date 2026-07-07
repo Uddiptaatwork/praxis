@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis — the natural scientist's harness for Claude</title>
+<meta name="description" content="Praxis configures Claude as a small lab that runs the scientific method over real data: a domain-agnostic core plus gravitational-wave (LVK) and pulsar-timing-array (PTA) domain packs, with mechanically-enforced cache integrity.">
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#111823; --panel2:#0e141d; --ink:#e6edf3; --dim:#9fb0c0;
+    --acc:#5ec8ff; --acc2:#7ef0c0; --warn:#ffcf6b; --line:#1f2b3a; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#13202e 0,var(--bg) 55%) fixed;
+       color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--acc);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  header{padding:70px 0 40px;border-bottom:1px solid var(--line)}
+  .eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--acc2);font-size:12px;font-weight:700}
+  h1{font-size:clamp(34px,6vw,58px);margin:.25em 0 .1em;line-height:1.05;letter-spacing:-.5px}
+  h1 .grad{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:19px;color:var(--dim);max-width:70ch}
+  .cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:11px 18px;border-radius:10px;font-weight:600;border:1px solid var(--line)}
+  .btn.primary{background:linear-gradient(90deg,#1a6aa8,#1f8f74);color:#fff;border:0}
+  .btn.ghost{background:var(--panel);color:var(--ink)}
+  section{padding:52px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:28px;margin:0 0 6px;letter-spacing:-.3px}
+  h2 .n{color:var(--acc);font:600 15px var(--mono);margin-right:10px;vertical-align:2px}
+  .sub{color:var(--dim);margin:0 0 26px;max-width:78ch}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{margin:0 0 6px;font-size:18px}
+  .card p{margin:0;color:var(--dim);font-size:15px}
+  .pill{display:inline-block;font:600 11px var(--mono);padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--acc2);margin-right:6px}
+  .pill.live{color:var(--acc2);border-color:#20493b;background:#0e1c17}
+  .pill.rederive{color:var(--warn);border-color:#4a3c18;background:#1c160a}
+  /* terminal */
+  .term{background:var(--panel2);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}
+  .term .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#0b1017;border-bottom:1px solid var(--line)}
+  .dot{width:11px;height:11px;border-radius:50%}
+  .r{background:#ff5f56}.y{background:#ffbd2e}.g{background:#27c93f}
+  .term .title{margin-left:8px;color:var(--dim);font:12px var(--mono)}
+  .term pre{margin:0;padding:16px 16px;overflow-x:auto;font:13px/1.55 var(--mono);color:#cfe3f2;white-space:pre}
+  .term pre .cmd{color:var(--acc2)} .term pre .c{color:#6f8296} .term pre .k{color:var(--acc)}
+  .term pre .w{color:var(--warn)} .term pre .ok{color:#7ef0c0}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0}
+  .steps li{position:relative;padding:12px 0 12px 44px;border-bottom:1px dashed var(--line)}
+  .steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:12px;width:28px;height:28px;
+    border-radius:8px;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center;color:var(--acc);font:600 13px var(--mono)}
+  .gifslot{background:var(--panel2);border:1px dashed #2b3b4e;border-radius:12px;min-height:150px;display:grid;place-items:center;text-align:center;color:var(--dim);padding:22px}
+  .gifslot img{max-width:100%;border-radius:8px;display:block}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600} code{font:12.5px var(--mono);background:#0d141d;border:1px solid var(--line);padding:1px 6px;border-radius:6px;color:#cfe3f2}
+  .note{color:var(--dim);font-size:13.5px;margin-top:10px}
+  footer{padding:40px 0 70px;color:var(--dim);font-size:14px}
+  .kb{font:12px var(--mono);color:var(--acc2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Anthropic × ETH AI Sprint · polygrav</div>
+  <h1>Praxis — the <span class="grad">natural scientist's</span> harness for Claude</h1>
+  <p class="lede">Most "AI for science" makes the model a single oracle you ask for an answer. Praxis instead configures Claude as a small <b>lab</b> that runs the scientific method explicitly — frame a falsifiable question, retrieve real data with provenance, compute, interpret, <i>try to break the result</i>, connect it across fields, and plan what's next. A domain-agnostic core, plus expert packs for <b>gravitational waves</b> and <b>pulsar timing arrays</b>.</p>
+  <div class="cta">
+    <a class="btn primary" href="#install">Install &amp; prime</a>
+    <a class="btn ghost" href="#scenarios">See it work</a>
+    <a class="btn ghost" href="https://github.com/&lt;you&gt;/praxis">GitHub</a>
+  </div>
+</header>
+
+<section id="what">
+  <h2><span class="n">01</span>Core + packs</h2>
+  <p class="sub">The method never changes; the domain does. So Praxis splits them. The <b>core</b> runs the scientific method on any field with no pack installed. A <b>pack</b> makes it a fluent expert co-scientist on one field — and ships its knowledge as a provenance-stamped cache under a declared integrity <b>tier</b>, not as prose the model might hallucinate.</p>
+  <div class="grid g3">
+    <div class="card"><h3>praxis <span class="pill">core</span></h3><p>The loop, the 8 scientist-roles, the integrity rules, and the typed cache engine (<code>pcache</code> · <code>pbuild</code> · <code>pvalidate</code>). Works standalone as a generalist co-scientist.</p></div>
+    <div class="card"><h3>packs/lvk <span class="pill live">tier LIVE</span></h3><p>Ground-based gravitational waves (LIGO–Virgo–KAGRA / GWOSC) — the flagship <b>Siren</b> pack. 391 GWTC events, asymmetric errors, per-catalog DOIs, live-API ground truth.</p></div>
+    <div class="card"><h3>packs/pta <span class="pill rederive">tier REDERIVE</span></h3><p>Pulsar timing arrays (NANOGrav 15yr, EPTA DR2, IPTA DR2 context). No live API — a deterministically re-derivable Zenodo/journal-DOI snapshot, never recalled.</p></div>
+  </div>
+</section>
+
+<section id="install">
+  <h2><span class="n">02</span>Install, then prime</h2>
+  <p class="sub">Install the core and one or more packs, then run <code>/init</code> once — a few minutes, mostly local reads — to cache an expert briefing into Claude's persistent memory.</p>
+  <div class="term">
+    <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">claude — install</span></div>
+<pre><span class="c"># in Claude Code</span>
+<span class="cmd">/plugin marketplace add</span> https://github.com/&lt;you&gt;/praxis
+<span class="cmd">/plugin install</span> praxis@praxis        <span class="c"># domain-agnostic core</span>
+<span class="cmd">/plugin install</span> praxis-lvk@praxis    <span class="c"># gravitational-wave pack (Siren)</span>
+
+<span class="cmd">/init lvk</span>   <span class="c"># one-time: reads the plugin + pack, writes an expert
+         # briefing into memory. Future sessions start fluent.</span></pre>
+  </div>
+  <ol class="steps">
+    <li><b>Resolve the pack</b> — argument, sole-pack auto-detect, or ask. Zero packs → runs as a generalist.</li>
+    <li><b>Gather the briefing</b> — <code>lib/memory_prime.py</code> reshapes the method loop + the pack's conventions / scope-traps / data-paths / landmark DOIs (deterministic, zero tokens).</li>
+    <li><b>Write to memory</b> — <code>praxis-method.md</code> + <code>praxis-domain-&lt;id&gt;.md</code> land in Claude's memory dir and are indexed in <code>MEMORY.md</code>.</li>
+    <li><b>Activate</b> — the pack id is written to <code>.praxis/active</code>; a <code>.praxis/primed</code> marker is stamped.</li>
+  </ol>
+  <p class="note">Core works without <code>/init</code>. Priming just makes it an <i>expert</i>: afterward the briefing is recalled as background context every session, so the loop runs fluently without re-reading the plugin.</p>
+</section>
+
+<section id="scenarios">
+  <h2><span class="n">03</span>See it work</h2>
+  <p class="sub">Every transcript below is <b>real, reproducible output</b> from this repo's tools — no mockups. The animated GIFs (drop-in slots) show the same flows inside a live Claude Code session.</p>
+
+  <h3 style="margin-top:6px">A · <span class="kb">/quick</span> — a cited lookup, offline, no loop</h3>
+  <div class="grid g2">
+    <div class="term">
+      <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">/quick most massive black hole merger so far</span></div>
+<pre><span class="cmd">$ python lib/pcache.py max total_mass_source</span>
+MAX total_mass_source in <span class="k">GWTC</span> (281 entities have this param):
+  <span class="k">GW231123_135430</span>: total_mass_source = 236.0 <span class="ok">+30.0/-47.0</span> M_sun
+  PROVENANCE: GWTC-4.1, https://doi.org/10.7935/6xqf-ba54;
+              snapshot retrieved 2026-06-18T14:05:03Z
+  NOTE: cumulative-scope answer. A per-release answer may differ.</pre>
+    </div>
+    <div class="gifslot"><img src="assets/gifs/quick.gif" alt="/quick demo" onerror="this.style.display='none';this.parentNode.innerHTML='&#127909; <b>GIF slot</b><br><span style=&quot;font-size:13px&quot;>assets/gifs/quick.gif<br>record with the guide in docs/RECORDING.md</span>'"></div>
+  </div>
+  <p class="note">The serving filter refuses to print a bare number: every value carries its asymmetric error and a resolvable DOI. The scope trap is enforced — "so far" resolves to the cumulative <code>GWTC</code>, not a single release.</p>
+
+  <h3 style="margin-top:28px">B · <span class="kb">/init pta</span> — prime a second domain in the same install</h3>
+  <div class="grid g2">
+    <div class="term">
+      <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">/quick largest GWB amplitude so far (pack: pta)</span></div>
+<pre><span class="cmd">$ PRAXIS_DOMAIN=pta python lib/pcache.py max A_gwb</span>
+MAX A_gwb in <span class="k">IPTA-DR2</span> (2 entities have this param):
+  <span class="k">EPTA-DR2</span>: A_gwb = 2.5e-15 <span class="ok">+7e-16/-7e-16</span>
+     note: strain amplitude at spectral index 13/3 (f_ref = 1/yr)...
+  PROVENANCE: EPTA-DR2, 10.5281/zenodo.8091568;
+              snapshot retrieved 2026-07-03T12:09:01Z</pre>
+    </div>
+    <div class="gifslot"><img src="assets/gifs/init.gif" alt="/init demo" onerror="this.style.display='none';this.parentNode.innerHTML='&#127909; <b>GIF slot</b><br><span style=&quot;font-size:13px&quot;>assets/gifs/init.gif<br>record with the guide in docs/RECORDING.md</span>'"></div>
+  </div>
+  <p class="note">Same install, different expertise. <code>PRAXIS_DOMAIN</code> / <code>.praxis/active</code> routes the query to the right pack's cache; the tier-REDERIVE PTA pack refuses live fallback on a miss — an honest absence, never a recall.</p>
+
+  <h3 style="margin-top:28px">C · <span class="kb">/investigate</span> — the full loop (skeptic mandatory)</h3>
+  <div class="term">
+    <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">/investigate Is GW190814's secondary a neutron star or a black hole?</span></div>
+<pre><span class="c"># principal-investigator frames a falsifiable question, then routes the loop:</span>
+<span class="k">literature-reader</span> → background: GW190814, 2.6 M_sun secondary (cited, arXiv:2006.12611)
+<span class="k">domain-expert-lvk</span> → conventions + the mass-gap ambiguity backstop
+<span class="k">analyst-coder</span>    → retrieve source-frame params from GWOSC (best +a/-b, DOI)
+<span class="k">interpreter</span>    → <span class="ok">MEASURED</span>: m2 = 2.59 +0.08/-0.09 M_sun
+                 <span class="ok">INFERRED</span>: sits in the NS–BH mass gap
+                 <span class="w">SPECULATIVE</span>: NS vs BH — the data does NOT distinguish
+<span class="k">skeptic</span>        → waveform systematics, EOS priors, selection — survives?
+<span class="k">next-steps</span>     → what a tidal measurement / EM counterpart would resolve
+<span class="c"># honest conclusion, licensed by open_limits: the source class is unresolved.</span></pre>
+  </div>
+  <div class="gifslot" style="margin-top:14px"><img src="assets/gifs/investigate.gif" alt="/investigate demo" onerror="this.style.display='none';this.parentNode.innerHTML='&#127909; <b>GIF slot</b> — assets/gifs/investigate.gif · record with docs/RECORDING.md'"></div>
+</section>
+
+<section id="integrity">
+  <h2><span class="n">04</span>Integrity, with teeth — and honest about its limits</h2>
+  <p class="sub">Cache integrity is <b>mechanically enforced</b>, not merely documented. <code>pvalidate.py</code> runs 11 contract gates per pack; <code>pcache.py</code> controls the output bytes so it physically cannot emit a bare number or an unprovenanced value.</p>
+  <div class="term">
+    <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">python lib/pvalidate.py packs/lvk packs/pta</span></div>
+<pre>  OK   gate 3: completeness: len(entities)=391 == results_count_reported=391
+  OK   gate 4: DOIs well-formed/resolvable       <span class="c"># empty-string rejected; null+flag ok</span>
+  OK   gate 7: record_params ⊆ cache params
+  OK   gate 9: no unfilled expert-judgment slots
+  => <span class="ok">lvk: GREEN</span>
+  WARN gate 5: transcription_audit present (tier REDERIVE)
+  => <span class="w">pta: GREEN-UNVERIFIED</span>   <span class="c"># honest: re-derivable, but no human audit yet</span></pre>
+  </div>
+  <table>
+    <tr><th>Oracle tier</th><th>What grades it</th><th>Integrity guarantee</th></tr>
+    <tr><td><span class="pill live">LIVE</span></td><td>Independent live-API diff at grade time (GWOSC v2)</td><td>Full mechanical cache integrity + live-fallback safety net. <i>packs/lvk.</i></td></tr>
+    <tr><td><span class="pill rederive">REDERIVE</span></td><td>Deterministic rebuild must byte-match</td><td>Re-derivable integrity; no live oracle; <i>community-unverified</i> until a human audit. <i>packs/pta.</i></td></tr>
+    <tr><td><span class="pill">ASSERTED</span></td><td>LLM-transcribed; no machine oracle</td><td>Method + discipline, <b>not</b> the mechanical guarantee — every value banners UNVERIFIED-CACHE.</td></tr>
+  </table>
+  <p class="note">And the honest boundary: Tier-1 deep-loop <i>generation</i> is eval-gated, not categorically guaranteed (the tuned GW pack measured ~89% provenance). "Mechanically enforced" is true for the cache and Tier-0 serving; it is a measured rate, not a proof, for free generation. Full detail in <a href="https://github.com/&lt;you&gt;/praxis/blob/main/ARCHITECTURE.md">ARCHITECTURE.md</a>.</p>
+</section>
+
+<section id="lab">
+  <h2><span class="n">05</span>The lab (roles → agents)</h2>
+  <p class="sub">The principal investigator does not produce the final claim — it frames, delegates, and holds the work to the standard.</p>
+  <div class="grid g3">
+    <div class="card"><h3>principal-investigator</h3><p>Frames the question, routes the loop, keeps the record.</p></div>
+    <div class="card"><h3>literature-reader</h3><p>Reads sources; extracts claim / method / assumptions / limits; cites.</p></div>
+    <div class="card"><h3>domain-expert-&lt;id&gt;</h3><p>Field physics, conventions, and the scope/significance backstop — from the active pack.</p></div>
+    <div class="card"><h3>analyst-coder</h3><p>Reproducible analysis on the pack's clients + the SBI stack; pins seeds + provenance.</p></div>
+    <div class="card"><h3>skeptic</h3><p>The mandatory adversarial pass: priors, systematics, selection, reproducibility.</p></div>
+    <div class="card"><h3>interpreter</h3><p>Separates measured / inferred / speculative — never lets inference wear a measurement's clothes.</p></div>
+    <div class="card"><h3>cross-domain-bridge</h3><p>Maps a result into what it constrains in adjacent fields.</p></div>
+    <div class="card"><h3>teacher</h3><p>Audience-tuned explanation; honesty about confidence over tidiness.</p></div>
+    <div class="card"><h3>next-steps</h3><p>Analysis-side and observation-side gap map; essential vs possible.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p><b>Praxis</b> · a domain-agnostic scientific-method plugin for Claude Code, with LVK and PTA domain packs. Add a field with <code>/praxis-build &lt;domain&gt;</code>. MIT.</p>
+  <p>Docs: <a href="https://github.com/&lt;you&gt;/praxis/blob/main/ARCHITECTURE.md">ARCHITECTURE.md</a> · <a href="https://github.com/&lt;you&gt;/praxis/blob/main/INSTALL.md">INSTALL.md</a> · <a href="RECORDING.md">recording the GIFs</a></p>
+</footer>
+
+</div>
+</body>
+</html>

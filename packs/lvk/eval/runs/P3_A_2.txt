@@ -1,0 +1,17 @@
+I wasn't granted web search access, so I'll answer from training data — but note I cannot verify against the live GWOSC page.
+
+**GW230529** (full ID: GW230529_181500), detected on 29 May 2023, was announced by the LVK collaboration in 2024. Based on the discovery paper ("Observation of Gravitational Waves from the Coalescence of a 2.5–4.5 M☉ Compact Object and a Neutron Star", Abbott et al. 2024):
+
+| Component | Median | 90% Credible Interval |
+|-----------|--------|----------------------|
+| Primary (m₁) | ~3.6 M☉ | 2.5 – 4.5 M☉ |
+| Secondary (m₂) | ~1.4 M☉ | ~1.2 – 2.0 M☉ |
+
+The primary's mass falls squarely in the **"mass gap"** between the heaviest known neutron stars (~2.2 M☉) and the lightest known black holes (~5 M☉), making this event scientifically notable.
+
+**For the authoritative numbers with the correct significant figures, cite:**
+> GWOSC event page: [gwosc.org/eventapi/html/GWTC-3/GW230529/](https://gwosc.org/eventapi/html/GWTC-3/GW230529/) *(URL from my training data — verify it's live)*
+
+And the discovery paper: Abbott et al. (2024), ApJL 970, L34, arXiv:2404.04248.
+
+Since I couldn't hit GWOSC directly, please cross-check the exact interval endpoints there before citing them.

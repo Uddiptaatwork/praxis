@@ -1,0 +1,101 @@
+{
+  "praxis_contract": "1.0",
+  "domain": {
+    "id": "pta",
+    "title": "Pulsar Timing Arrays",
+    "band": "nanohertz gravitational waves",
+    "depends": { "praxis-core": ">=1.0 <2.0" }
+  },
+
+  "expert_agent": "agents/domain-expert-pta.md",
+  "data_skill": "skills/pta-data/SKILL.md",
+  "expert_attestation": null,
+  "corpus_license": "open-only",
+
+  "cache": {
+    "path": "cache/pta_snapshot.json",
+    "schema": "praxis-core://cache.schema.json/1.0",
+    "entity_kind": "release",
+    "id_field": "release_tag",
+    "id_aliases": true,
+    "cumulative_scope": "IPTA-DR2",
+    "supersede_rule": "complement",
+    "display_order": ["A_gwb", "hd_significance_sigma", "bayes_factor", "false_alarm_probability_pct", "n_pulsars", "timespan_yr"],
+    "record_params": ["A_gwb", "hd_significance_sigma", "bayes_factor", "false_alarm_probability_pct", "n_pulsars", "timespan_yr"]
+  },
+
+  "sources": {
+    "primary": [
+        "source_fetched": "WebFetch https://arxiv.org/abs/2306.16213 (abstract); dataset DOI verified via WebFetch https://zenodo.org/records/8423265 and https://doi.org/10.5281/zenodo.8423265" },
+      { "name": "EPTA DR2", "kind": "zenodo", "doi": "10.5281/zenodo.8091568",
+        "license": "CC-BY-4.0", "access": "dataset-doi",
+        "paper_doi": "10.1051/0004-6361/202346844", "arxiv": "2306.16214",
+        "source_fetched": "WebFetch https://arxiv.org/abs/2306.16214 and https://arxiv.org/abs/2306.16214v1 (EPTA DR2 Paper III abstract); WebFetch https://zenodo.org/records/8091568 (dataset DOI)" },
+      { "name": "IPTA DR2", "kind": "arxiv", "doi": "10.5281/zenodo.8091568",
+        "license": "CC-BY-4.0", "access": "cross-pta-context",
+        "arxiv": "2201.03980",
+        "source_fetched": "WebFetch https://arxiv.org/abs/2201.03980 (IPTA DR2 context); cross-PTA context only, NOT a confirmed Hellings-Downs detection" }
+    ],
+    "live_api": null,
+    "latest_release_probe": null,
+    "clients": ["enterprise", "enterprise_extensions", "PINT", "la_forge", "PTArcade"]
+  },
+
+  "oracle": {
+    "adapter": "oracle/pta_oracle.py",
+    "tier": "REDERIVE",
+    "kind": "cached-release-table",
+    "transcription_audit": null,
+    "checks": ["entity_exists", "param_within_sigma", "scope_resolved", "identifier_resolves"]
+  },
+
+  "sota": {
+    "path": "cache/sota.json",
+    "schema": "praxis-core://sota.schema.json/1.0",
+    "refresh": { "trigger": "new-data-release", "cadence_hint": "P2Y", "hard_expiry": "P3Y" }
+  },
+
+  "conventions": {
+    "frames": [
+      "red-noise power-law spectrum: characteristic strain h_c(f) = A (f / f_ref)^alpha",
+      "f_ref = 1/yr (reference frequency 1 yr^-1)",
+      "spectral index alpha = -2/3 for a SMBHB population, i.e. timing-residual PSD index gamma = 13/3",
+      "A is the dimensionless characteristic-strain amplitude at f_ref"
+    ],
+    "identifier_formats": { "pulsar": "J\\d{4}[+-]\\d{4}", "release": "[A-Za-z]+-\\w+" },
+    "asymmetric_errors": true,
+    "scope_trap": "no naive cross-release combination; resolve to the right release. A common-spectrum process (CURN) is NOT a Hellings-Downs detection: IPTA DR2 found a common process but NO significant HD correlation, so its amplitude must not be reported as a confirmed GWB."
+  },
+
+  "skeptic_threats": [
+    "common-uncorrelated red noise (CURN) vs Hellings-Downs (quadrupolar) correlation: a common spectrum alone is NOT a GWB detection (IPTA DR2 case)",
+    "solar-system ephemeris systematics (BayesEphem)",
+    "DM variations / solar wind / pulsar jitter mismodeling",
+    "look-elsewhere / sky-scramble & phase-shift significance assessment",
+    "amplitude agreement across PTAs is corroborating but is NOT itself HD-correlated evidence",
+    "frequentist p-value vs Bayesian Bayes factor: NANOGrav reports ~3.5-4 sigma frequentist AND a Bayes factor > 10^14; EPTA DR2 reports Bayes factor 60 / FAP ~0.1% (>=3 sigma) on the 10.3-yr DR2new subset"
+  ],
+
+  "measured_vs_inferred": {
+    "measured": ["pulsar timing residuals", "white-noise parameters", "data timespan", "number of pulsars in the analysis"],
+    "inferred_under_assumptions": [
+      "GWB characteristic-strain amplitude A (given a power-law spectrum)",
+      "Hellings-Downs correlation significance",
+      "Bayes factor / false-alarm probability for the GWB model"
+    ],
+    "speculative": ["GWB source class: SMBHB population vs cosmic strings vs cosmological phase transition vs inflation"]
+  },
+
+  "open_limits": [
+    "GWB source class not yet distinguished (SMBHB population vs cosmological origin)",
+    "IPTA DR2 found only a common-spectrum process, not a confirmed Hellings-Downs correlation"
+  ],
+
+  "bridges": [
+    "SMBHB demographics / galaxy-merger history",
+    "early-universe cosmology (cosmic strings, phase transitions, inflation)",
+    "LISA (mHz) complementarity"
+  ],
+
+  "version": "0.1.0"
+}

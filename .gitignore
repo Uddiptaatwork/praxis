@@ -62,11 +62,5 @@ Thumbs.db
 *.swp
 *~
 
-# ── Eval bundle: commit ONLY the scored data the integrity hexagon is drawn from
-#    (eval/results/scores/_all_scores.json), so the figure reproduces from a fresh
-#    clone. Everything else under results/ stays ignored, even if generated locally. ──
-!eval/results/
-eval/results/*
-!eval/results/scores/
-eval/results/scores/*
-!eval/results/scores/_all_scores.json
+# Praxis runtime state (active pack marker)
+.praxis/

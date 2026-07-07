@@ -1,13 +1,24 @@
 {
   "name": "praxis",
-  "owner": {
-    "name": "polygrav"
+  "owner": { "name": "polygrav" },
+  "metadata": {
+    "description": "Praxis — the natural scientist's harness for Claude: a domain-agnostic scientific-method core plus expert domain packs (gravitational waves, pulsar timing arrays) with provenance-stamped, mechanically-validated data caches."
   },
   "plugins": [
     {
       "name": "praxis",
       "source": "./",
-      "description": "Everything-Claude-Code for data-driven natural science. A team of scientist-agents that run the scientific method end to end, with a flagship gravitational-wave pack (Siren) over real GWOSC data."
+      "description": "Domain-agnostic core: a team of scientist-agents that run the scientific method end to end (frame, retrieve, compute, interpret, break, connect, plan) over real data, plus the cache engine (pcache/pbuild/pvalidate) and the fast /init memory-prime. Works standalone on any field; install a pack to become a domain expert."
+    },
+    {
+      "name": "praxis-lvk",
+      "source": "./packs/lvk",
+      "description": "Ground-based gravitational waves (LIGO-Virgo-KAGRA / GWOSC) — the flagship 'Siren' pack. Oracle tier LIVE: a live-API GWTC event catalog (391 events) with asymmetric uncertainties, per-catalog DOIs, and precomputed superlatives. Depends on praxis (core). Requires: /init lvk."
+    },
+    {
+      "name": "praxis-pta",
+      "source": "./packs/pta",
+      "description": "Pulsar timing arrays (nanohertz GW background: NANOGrav 15yr, EPTA DR2, IPTA DR2 context). Oracle tier REDERIVE: no live API — a provenance-stamped, deterministically re-derivable Zenodo/journal-DOI snapshot, never recalled; community-unverified until a human transcription audit. Depends on praxis (core)."
     }
   ]
 }

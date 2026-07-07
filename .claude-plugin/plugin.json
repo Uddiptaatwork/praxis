@@ -1,16 +1,11 @@
 {
   "name": "praxis",
-  "version": "0.1.0",
-  "description": "The natural scientist's harness for Claude. Turns Claude into a team of scientists that run the full scientific method over real data — paper reader, domain expert, analyst-coder, skeptic, interpreter, teacher, next-steps planner. Ships Siren, a flagship gravitational-wave domain pack built on real GWOSC data.",
-  "author": {
-    "name": "polygrav"
-  },
+  "version": "1.0.0",
+  "description": "The natural scientist's harness for Claude. Domain-agnostic core: a lab of scientist-agents that run the full scientific method over real data — paper reader, domain expert, analyst-coder, skeptic, interpreter, teacher, next-steps planner — plus a typed cache engine with mechanically-enforced integrity (pcache/pbuild/pvalidate) and a fast /init memory-prime. Install a domain pack (praxis-lvk gravitational waves, praxis-pta pulsar timing arrays) to turn it into an expert co-scientist on that field.",
+  "author": { "name": "polygrav" },
   "license": "MIT",
   "keywords": [
     "science", "scientific-method", "data-driven-science", "research",
-    "gravitational-waves", "gwosc", "simulation-based-inference", "agents"
-  ],
-  "agents": "agents/",
-  "skills": "skills/",
-  "commands": "commands/"
+    "agents", "provenance", "reproducibility", "simulation-based-inference"
+  ]
 }

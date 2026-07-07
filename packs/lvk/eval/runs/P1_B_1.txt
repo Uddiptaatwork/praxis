@@ -1,0 +1,10 @@
+Here are the source-frame component masses of GW150914 at 90% credible intervals, from the current best estimate (version 4, GWTC-2.1):
+
+| Parameter | Value |
+|---|---|
+| **m₁ (primary)** | **34.6 +4.4/−2.6 M☉** |
+| **m₂ (secondary)** | **30.0 +2.9/−4.6 M☉** |
+
+**Source:** GWOSC event-version GW150914-v4, catalog GWTC-2.1-confident  
+**DOI:** https://doi.org/10.7935/qf3a-3z67  
+**Detectors:** H1, L1 | **GPS:** 1126259462.4 | **Snapshot retrieved:** 2026-06-18

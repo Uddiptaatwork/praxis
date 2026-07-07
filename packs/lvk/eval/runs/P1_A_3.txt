@@ -1,0 +1,15 @@
+I wasn't able to fetch the live GWOSC page (web search wasn't permitted), so I'll give you what's in my training data and flag where to verify.
+
+**GW150914 source-frame component masses (90% credible intervals)**
+from the original discovery paper (Abbott et al. 2016, *PRL* 116, 061102), which is the dataset hosted on GWOSC:
+
+| Component | Mass (M☉) |
+|-----------|-----------|
+| Primary (*m*₁) | 36.2 ⁺⁵·²/₋₃.₈ |
+| Secondary (*m*₂) | 29.1 ⁺³·⁷/₋₄.₄ |
+
+**Caveat:** Subsequent catalog releases (GWTC-1, GWTC-2, GWTC-3) re-analyzed GW150914 with improved waveform models and updated posteriors. The GWOSC event page may show the more recent values (e.g., GWTC-3 gives m₁ ≈ 35.6 M☉, m₂ ≈ 30.6 M☉ with slightly different intervals). Always pull the authoritative numbers directly from:
+
+**https://gwosc.org/events/GW150914/**
+
+That page links to the parameter estimation data releases and cites the specific analysis version.

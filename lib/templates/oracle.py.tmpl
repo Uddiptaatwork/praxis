@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+"""Oracle adapter for the ${ID} pack (tier ${TIER}).
+
+Implements the core Oracle interface: score_core.py calls check(name, snap, ...)
+for ground-truth-at-grade-time. LIVE diffs an independent API; REDERIVE byte-matches
+a deterministic rebuild; ASSERTED registers 'no machine oracle'."""
+CHECKS = ["entity_exists", "param_within_sigma", "scope_resolved", "identifier_resolves"]
+TIER = "${TIER}"
+
+# Pack-supplied DomainScorer config for eval/score_core.py:
+DOI_PREFIX = r"${DOI_PREFIX}"          # e.g. 10.7935/ for GWOSC
+ENTITY_RE = r"${ENTITY_RE}"            # e.g. GW\d{6}(_\d{6})?
+CATALOG_RE = r"${CATALOG_RE}"          # e.g. GWTC-\d(\.\d)?
+SUPERLATIVE_PARAM = ${SUPERLATIVE_MAP} # e.g. {"massive": "total_mass_source"}
+
+def entity_exists(snap, name):
+    ents = snap.get("entities") or snap.get("events") or {}
+    return name in ents
+
+def scope_resolved(snap, scope):
+    return scope == snap["_meta"].get("cumulative_scope")
+
+def identifier_resolves(snap, name):
+    ents = snap.get("entities") or snap.get("events") or {}
+    e = ents.get(name, {})
+    return bool(e.get("release_doi") or snap["_meta"].get("dois", {}).get(e.get("catalog")))
+
+def param_within_sigma(snap, name, param, value, nsigma=3.0):
+    ents = snap.get("entities") or snap.get("events") or {}
+    p = (ents.get(name, {}).get("parameters") or {}).get(param)
+    if not p or not isinstance(p.get("best"), (int, float)):
+        return None
+    up = abs(p.get("upper_error") or 0) or 1e-30
+    lo = abs(p.get("lower_error") or 0) or 1e-30
+    d = value - p["best"]
+    return (d / up if d >= 0 else abs(d) / lo) <= nsigma
