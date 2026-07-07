@@ -94,7 +94,7 @@ The numbered GWTC catalogs on GWOSC are **per-observing-run segments, not cumula
 | `GWTC-5.0` | O4b | |
 | `GWTC` (umbrella) | all runs | cumulative current-best view |
 
-Consequence: the largest-total-mass BBH overall, **GW231123_135430** (M_total ~236 M☉), lives under **GWTC-4.1 (O4a)** and is **NOT in GWTC-5.0**. The largest in GWTC-5.0 (O4b) is **GW241230_233618** (~116 M☉). A "largest in GWTC-5.0" answer is not the largest overall.
+Consequence: the largest-total-mass BBH overall, **GW231123_135430**, lives under **GWTC-4.1 (O4a)** and is **NOT in GWTC-5.0**. The largest in GWTC-5.0 (O4b) is **GW241230_233618**. A "largest in GWTC-5.0" answer is not the largest overall.
 
 Each catalog detail (`/api/v2/catalogs/<CATALOG>`) returns `{name, description, doi, events_url}`. Numbered releases carry a real `doi` — e.g. GWTC-5.0 → `https://doi.org/10.7935/bk00-6a89`, GWTC-4.1 → `https://doi.org/10.7935/6xqf-ba54`. The umbrella `GWTC` has `doi: null` (cite the relevant numbered release + the event-version DOI instead).
 
