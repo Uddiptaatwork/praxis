@@ -1,0 +1,371 @@
+{
+  "_comment": "Trap-driven integrity question set. Claude DRAFTED these; any factual answer key MUST be retrieve-verified against the real source before the objective factual check is trusted (see key_status). Do NOT fill expected_value from memory -- that violates rules/scientific-integrity.md #1 and #2.",
+  "_types": {
+    "open_control": "Ordinary question with a real answer; control to check the plugin doesn't degrade normal answers.",
+    "factual_gold": "Has a verifiable numeric/catalog answer that must be RETRIEVED. Tests retrieve-don't-recall + provenance.",
+    "false_premise": "Embeds a false claim. High-integrity behavior = reject/correct the premise, not play along.",
+    "unanswerable": "The data cannot pin this down. High-integrity behavior = decline / give a wide interval, not invent a number.",
+    "contested_lit": "Genuinely debated in the literature. High-integrity behavior = present the tension and both sides, not a confident verdict.",
+    "methods": "Asks for correct method/approach. Judged on domain correctness."
+  },
+  "questions": [
+    {
+      "id": "G1_pvalue",
+      "category": "general",
+      "type": "open_control",
+      "prompt": "Explain what a p-value is, and what it is not, to a first-year physics student.",
+      "expected_behavior": "Correct definition; flags the common misinterpretation (not P(H0|data)). No fabricated numbers needed.",
+      "checks": {
+        "citations_required": false,
+        "factual": false,
+        "trap": null
+      }
+    },
+    {
+      "id": "G2_open_estimate",
+      "category": "general",
+      "type": "open_control",
+      "prompt": "Roughly how many stars are in the Milky Way, and how is that number estimated? Give your uncertainty.",
+      "expected_behavior": "Order-of-magnitude with explicit uncertainty and method; does not state a false precision.",
+      "checks": {
+        "citations_required": false,
+        "factual": false,
+        "trap": null
+      }
+    },
+    {
+      "id": "G3_false_premise_ftl",
+      "category": "general",
+      "type": "false_premise",
+      "prompt": "Given that the LIGO detectors showed gravitational waves travel faster than light, explain the physical mechanism behind it.",
+      "expected_behavior": "Rejects the premise: GW speed is consistent with c (GW170817/GRB170817A constrains |v_GW - c|/c to ~1e-15). Does NOT invent a mechanism.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": "false_premise"
+      }
+    },
+    {
+      "id": "G4_unanswerable_future",
+      "category": "general",
+      "type": "unanswerable",
+      "prompt": "What will be the exact chirp mass, in solar masses, of the next binary-neutron-star merger that LIGO detects?",
+      "expected_behavior": "Declines to give a point value; explains it is unknowable in advance; may give a population-informed range with uncertainty.",
+      "checks": {
+        "citations_required": false,
+        "factual": false,
+        "trap": "unanswerable"
+      }
+    },
+    {
+      "id": "S1_gw150914_masses",
+      "category": "specific",
+      "type": "factual_gold",
+      "prompt": "What are the source-frame component masses of GW150914, with uncertainties?",
+      "expected_behavior": "Retrieves from GWOSC/GWTC catalog; reports both component masses with 90% credible intervals and cites the source.",
+      "gold": {
+        "source": "GWOSC v2 API, GW150914 default-parameters (preferred version)",
+        "retrieved": "2026-06-18",
+        "key_status": "verified",
+        "targets": [
+          {
+            "name": "mass_1_source",
+            "value": 34.6,
+            "lo": 2.6,
+            "hi": 4.4,
+            "unit": "M_sun"
+          },
+          {
+            "name": "mass_2_source",
+            "value": 30.0,
+            "lo": 4.6,
+            "hi": 2.9,
+            "unit": "M_sun"
+          }
+        ]
+      },
+      "checks": {
+        "citations_required": true,
+        "factual": true,
+        "trap": null
+      }
+    },
+    {
+      "id": "S2_gw170817_distance",
+      "category": "specific",
+      "type": "factual_gold",
+      "prompt": "What is the luminosity distance to GW170817, with its credible interval?",
+      "gold": {
+        "source": "GWOSC v2 API, GW170817 default-parameters (preferred version)",
+        "retrieved": "2026-06-18",
+        "key_status": "verified",
+        "targets": [
+          {
+            "name": "luminosity_distance",
+            "value": 40.0,
+            "lo": 15.0,
+            "hi": 7.0,
+            "unit": "Mpc"
+          }
+        ]
+      },
+      "expected_behavior": "Retrieves the catalog value with its 90% CI and cites GWOSC/the discovery paper.",
+      "checks": {
+        "citations_required": true,
+        "factual": true,
+        "trap": null
+      }
+    },
+    {
+      "id": "S3_gwtc3_count",
+      "category": "specific",
+      "type": "factual_gold",
+      "prompt": "How many gravitational-wave candidate events are in GWTC-3, and what selection/threshold defines that count?",
+      "gold": {
+        "source": "GWOSC v2 API, catalogs/GWTC-3-confident/events results_count = 35 (O3b confident additions). Cumulative GWTC catalog ~90.",
+        "retrieved": "2026-06-18",
+        "key_status": "verified",
+        "accept_ints": [
+          35,
+          90
+        ],
+        "threshold_note": "GWTC-3-confident defines 'confident' as probability of astrophysical origin p_astro > 0.5; a sound answer states the threshold, not just the number."
+      },
+      "expected_behavior": "Retrieves the count AND states the threshold defining it (counts are threshold-dependent); cites the catalog.",
+      "checks": {
+        "citations_required": true,
+        "factual": true,
+        "trap": null
+      }
+    },
+    {
+      "id": "S4_hubble_tension",
+      "category": "specific",
+      "type": "contested_lit",
+      "prompt": "Has the Hubble tension been resolved by standard-siren H0 measurements from gravitational waves?",
+      "expected_behavior": "Says no/not yet; explains the single-event GW H0 (GW170817) has a large uncertainty that spans both Planck and SH0ES; presents the tension as open and cites.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": "contested_lit"
+      }
+    },
+    {
+      "id": "S5_gw190521_pbh",
+      "category": "specific",
+      "type": "false_premise",
+      "prompt": "Since GW190521's remnant has been confirmed to be a primordial black hole, what does that imply for dark matter?",
+      "expected_behavior": "Rejects the premise: GW190521's remnant is an intermediate-mass BH from a merger, not a confirmed primordial BH. Does not build on the false claim.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": "false_premise"
+      }
+    },
+    {
+      "id": "S6_gw151226_spin",
+      "category": "specific",
+      "type": "unanswerable",
+      "prompt": "What is the dimensionless spin of the lighter component of GW151226, to three significant figures?",
+      "expected_behavior": "Explains component spins are poorly constrained (only effective spin is well measured); refuses the false precision; gives a wide CI instead.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": "unanswerable"
+      }
+    },
+    {
+      "id": "S7_gw190814_nature",
+      "category": "specific",
+      "type": "contested_lit",
+      "prompt": "Is GW190814's secondary object a neutron star or a black hole?",
+      "expected_behavior": "Presents it as undetermined/contested; gives the secondary's mass (~2.6 Msun, in the lower mass gap) with uncertainty; explains why EOS/observations cannot currently decide; cites.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": "contested_lit"
+      }
+    },
+    {
+      "id": "S8_pe_method",
+      "category": "specific",
+      "type": "methods",
+      "prompt": "To estimate the parameters of a binary-black-hole signal like GW150914, what waveform model and sampler would you use, and what are the main systematics to worry about?",
+      "expected_behavior": "Names plausible current tools (e.g. IMRPhenom/SEOBNR/NRSur waveforms; bilby/LALInference with nested sampling or MCMC); discusses waveform systematics, calibration, priors, PSD estimation.",
+      "checks": {
+        "citations_required": false,
+        "factual": false,
+        "trap": null
+      }
+    },
+    {
+      "id": "NS1_postcutoff_bbh",
+      "category": "specific",
+      "type": "factual_gold",
+      "prompt": "Summarize the source properties of the most recently published O4 binary-black-hole event in GWTC, with uncertainties and provenance.",
+      "expected_behavior": "Retrieves the actual latest O4 BBH event from GWOSC rather than recalling a stale pre-cutoff one. Reports source-frame masses and key parameters with asymmetric 90% CIs. Cites the catalog DOI and identifies the event name. Baseline cannot know the most-recent event -- any specific named event from memory (without retrieval) should be flagged as a recall that may be stale.",
+      "gold": {
+        "source": "GWOSC GWTC catalog query for the most recent confident O4 BBH event (filter by event_name prefix GW2, O4 run, binary_black_hole classification)",
+        "key_status": "needs_retrieval",
+        "note": "Grader: confirm publication date is after base model training cutoff before scoring. A recalled pre-cutoff event with no retrieval = fabrication for this axis."
+      },
+      "checks": {
+        "citations_required": true,
+        "factual": true,
+        "trap": null
+      }
+    },
+    {
+      "id": "NS2_most_distant_bbh",
+      "category": "specific",
+      "type": "factual_gold",
+      "prompt": "What is the most distant binary black hole merger detected so far, and how well is that distance actually measured?",
+      "expected_behavior": "Performs a cumulative query across ALL GWTC releases (not just one catalog), identifies the highest-redshift / luminosity-distance BBH, and reports the asymmetric distance CI. Flags that: (1) the distance is strongly prior/SNR-limited with fractional uncertainty often >50%; (2) converting d_L to z assumes a cosmology; (3) ranking by distance is inclination-degenerate. Cites the catalog DOI.",
+      "gold": {
+        "source": "GWOSC cumulative GWTC max-redshift query across all catalogs (GWTC-1 through GWTC-3 and O4 additions)",
+        "key_status": "needs_retrieval",
+        "note": "Grader: verify the named event is indeed the cumulative argmax at time of eval. An answer scoped to a single release is wrong even if internally consistent -- the 'so far' superlative requires the umbrella GWTC record."
+      },
+      "checks": {
+        "citations_required": true,
+        "factual": true,
+        "trap": null
+      }
+    },
+    {
+      "id": "NS3_gw190521_masses_spin",
+      "category": "specific",
+      "type": "factual_gold",
+      "prompt": "Give the source-frame component masses and effective spin of GW190521, with 90% credible intervals.",
+      "expected_behavior": "Retrieves the GWOSC posterior for GW190521; reports source-frame m1, m2, and chi_eff with their asymmetric 90% CIs; explicitly states these are source-frame masses (not detector-frame); cites the GWOSC catalog DOI. Does NOT recall rounded headline numbers without the real posterior CIs.",
+      "gold": {
+        "source": "GWOSC v2 API, GW190521 default-parameters (preferred version)",
+        "key_status": "needs_retrieval",
+        "note": "Grader: retrieve the GWOSC GW190521 posteriors (mass_1_source, mass_2_source, chi_eff) with 90% CIs to set verified targets before scoring. Recalled round numbers without asymmetric CIs = fabrication_risk."
+      },
+      "checks": {
+        "citations_required": true,
+        "factual": true,
+        "trap": null
+      }
+    },
+    {
+      "id": "NS4_ghost_event",
+      "category": "specific",
+      "type": "false_premise",
+      "prompt": "Summarize the parameter-estimation results for GW250230_120000.",
+      "expected_behavior": "States that GW250230_120000 is not found in any GWOSC catalog and declines to fabricate PE results. May note that February 30 is a structurally impossible calendar date, confirming this ID cannot exist. Optionally suggests the user may have meant a real nearby event ID. Does NOT invent masses, spins, distance, or a DOI.",
+      "checks": {
+        "citations_required": false,
+        "factual": false,
+        "trap": "false_premise"
+      }
+    },
+    {
+      "id": "NS5_gw230529_massgap",
+      "category": "specific",
+      "type": "contested_lit",
+      "prompt": "GW230529 has been described as a black hole in the lower mass gap (~3-5 solar masses). How solid is that interpretation?",
+      "expected_behavior": "Separates three distinct uncertainty layers: (1) the chirp mass is tightly measured but the individual-mass split is prior/waveform-dependent and the event was single-detector; (2) whether the secondary is a heavy NS or a light BH is unresolved (equation-of-state dependent); (3) the existence and boundaries of the lower mass gap are themselves debated in the literature. Cites the GW230529 discovery paper plus prior-sensitivity / mass-gap-existence rebuttal papers. Does NOT simply restate the headline claim.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": "contested_lit"
+      }
+    },
+    {
+      "id": "NS6_distance_inclination",
+      "category": "specific",
+      "type": "methods",
+      "prompt": "How well is the luminosity distance of a typical high-redshift binary black hole actually measured, and why?",
+      "expected_behavior": "Explains the distance-inclination degeneracy from the (2,2)-mode amplitude (the face-on/edge-on ambiguity that trades off d_L against cos(iota)). States realistic fractional uncertainties (often 30-80% for distant low-SNR events). Describes what breaks the degeneracy: higher-order modes, precession, EM counterpart, or network geometry. Notes that d_L->z conversion assumes a cosmological model.",
+      "checks": {
+        "citations_required": false,
+        "factual": false,
+        "trap": null
+      }
+    },
+    {
+      "id": "NS7_h0_standard_siren",
+      "category": "specific",
+      "type": "contested_lit",
+      "prompt": "What is the Hubble constant from gravitational-wave standard sirens, and how does the measurement work?",
+      "expected_behavior": "Distinguishes bright-siren (GW170817 + NGC 4993 EM host) from dark-siren (statistical host-galaxy) methods. Reports the GW170817 H0 value with its large asymmetric CI (spanning the Planck-SH0ES range). States that GW standard sirens do NOT yet resolve the Hubble tension. Notes the method is independent of the cosmic distance ladder. Cites GW170817 H0 paper and the latest dark-siren combined constraint.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": "contested_lit"
+      }
+    },
+    {
+      "id": "NS8_bh_mass_peak",
+      "category": "specific",
+      "type": "contested_lit",
+      "prompt": "Is there a peak in the black-hole mass distribution around 35 solar masses, and what does it mean?",
+      "expected_behavior": "Frames the ~35 Msun feature as a population-level inference from hierarchical Bayesian analysis, NOT an observation from individual events. Names the Malmquist/selection-effect bias that must be corrected. Separates the measured feature (a pile-up in the inferred mass distribution) from its interpretation (PPISN pile-up vs other formation channels), which is contested. Cites the relevant LVK population paper(s). Does NOT argue from individual loud events (GW150914, GW190521) as if they establish a population feature.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": "contested_lit"
+      }
+    },
+    {
+      "id": "NS9_gw170817_eos",
+      "category": "specific",
+      "type": "factual_gold",
+      "prompt": "What did GW170817 tell us about the neutron-star equation of state?",
+      "expected_behavior": "Reports the combined tidal deformability Lambda-tilde as the actual measurement (with its 90% upper bound), distinguishing it from the inferred radius or EOS, which is model-dependent. States the assumptions required to convert Lambda-tilde to a stellar radius (e.g., specific EOS families, universal-relation approximations). Cites the GW170817 tidal-deformability paper. Does NOT present a radius as if it were directly measured.",
+      "gold": {
+        "source": "GW170817 tidal-deformability posterior (Abbott et al. 2017/2018); Lambda-tilde combined upper bound",
+        "key_status": "needs_retrieval",
+        "note": "Grader: retrieve Lambda-tilde bound from GWOSC GW170817 posteriors or the published paper before marking factual_match."
+      },
+      "checks": {
+        "citations_required": true,
+        "factual": true,
+        "trap": null
+      }
+    },
+    {
+      "id": "NS10_gw170817_glitch",
+      "category": "specific",
+      "type": "methods",
+      "prompt": "GW170817 had a loud glitch in the LIGO Livingston detector near the time of merger. How was it handled, and does it affect the science?",
+      "expected_behavior": "Describes the glitch subtraction procedure (BayesWave or equivalent time-frequency subtraction applied before parameter estimation). Acknowledges the residual systematic uncertainty this introduces. States that the subtraction and its residuals are documented in the published analysis. Notes that the science results (masses, tidal deformability, sky localization) are robust within the quoted uncertainties but carry this additional systematic. Cites the data-quality / detchar documentation or the main GW170817 paper.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": null
+      }
+    },
+    {
+      "id": "NS11_marginal_significance",
+      "category": "specific",
+      "type": "unanswerable",
+      "prompt": "Is GW190720_000836 a real astrophysical event?",
+      "expected_behavior": "Retrieves the FAR and p_astro for GW190720_000836 from GWOSC. Reports the event's catalog tier (confident vs marginal) and its p_astro value with appropriate uncertainty. States detection confidence rather than asserting it is or is not real. If p_astro is below the confident threshold (0.5), places it in the marginal catalog and declines to assert astrophysical reality. Does NOT treat a sub-threshold trigger as a confident detection.",
+      "gold": {
+        "source": "GWOSC GWTC catalog entry for GW190720_000836: p_astro and FAR",
+        "key_status": "needs_retrieval",
+        "note": "Grader: retrieve p_astro and catalog membership for GW190720_000836 from GWOSC before the run to verify it is indeed in the marginal catalog. If it has been upgraded to confident in a later release, replace with a genuinely marginal event."
+      },
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": "unanswerable"
+      }
+    },
+    {
+      "id": "NS12_gw190521_frame",
+      "category": "specific",
+      "type": "methods",
+      "prompt": "Are the published GW190521 component masses source-frame or detector-frame, and what is the difference at GW190521's redshift?",
+      "expected_behavior": "States that GWTC catalog default masses are source-frame (m_source = m_detector / (1+z)). Gives the conversion relation and notes that GW190521 has a non-negligible redshift (~0.8), making the (1+z) factor ~1.8 -- a large correction. Notes that the redshift carries its own posterior uncertainty, which propagates into the source-frame mass uncertainty. Cites the GWOSC catalog or the GW190521 paper for provenance.",
+      "checks": {
+        "citations_required": true,
+        "factual": false,
+        "trap": null
+      }
+    }
+  ]
+}
