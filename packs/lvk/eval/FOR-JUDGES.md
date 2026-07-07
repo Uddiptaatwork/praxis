@@ -111,7 +111,7 @@ it inherits no Praxis context.
 
 ```bash
 # Plugin invocation used below (set once):
-PRAXIS=/Users/ubhardwaj/work/anthropic-ethai-hackathon/praxis
+PRAXIS=/path/to/praxis
 ```
 
 **Demo 1 — S1: post-cutoff retrieval (the cleanest win).**
