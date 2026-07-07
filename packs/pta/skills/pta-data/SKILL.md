@@ -71,7 +71,7 @@ Natural-language → command:
 ## Tier REDERIVE: a cache miss is an honest absence, never a recall
 
 There is **no live fallback**. If the requested release or parameter is not in the
-cached set, `query.py` exits non-zero with *"not in the cached release set"* — say
+cached set, `lib/pcache.py` exits non-zero with *"not in the cached release set"* — say
 exactly that. Do **not** recall a number, do **not** invent a DOI, do **not** reach
 for a live API (there is none). Past the snapshot's hard-expiry, treat the cache as
 expired and re-verify rather than serving it as authoritative.
