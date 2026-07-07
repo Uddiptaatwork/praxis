@@ -30,7 +30,4 @@ def param_within_sigma(snap, name, param, value, nsigma=3.0):
     p = (ents.get(name, {}).get("parameters") or {}).get(param)
     if not p or not isinstance(p.get("best"), (int, float)):
         return None
-    up = abs(p.get("upper_error") or 0) or 1e-30
-    lo = abs(p.get("lower_error") or 0) or 1e-30
-    d = value - p["best"]
-    return (d / up if d >= 0 else d / lo) <= nsigma
+    return (d / up if d >= 0 else abs(d) / lo) <= nsigma
