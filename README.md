@@ -1,40 +1,37 @@
 # Praxis
 
-**The natural scientist's harness for Claude.** Everything-Claude-Code, but the operator is an ideal natural scientist instead of a software engineer — and the flagship domain is gravitational-wave physics (the **Siren** pack), because that's what we do.
+**The natural scientist's harness for Claude.** Everything-Claude-Code, but the operator is an ideal natural scientist instead of a software engineer.
 
 Most "AI for science" turns the model into a single oracle you ask for an answer. Praxis instead configures Claude as a small lab that runs the **scientific method** explicitly: frame a falsifiable question, establish background from real literature, get the method right, compute on real data, interpret, *try to break the result*, connect it across fields, and map what to do next. The result is an investigation with provenance and uncertainty — not a confident paragraph.
 
-## Install (Claude Code)
+## Core + packs
+
+- **`praxis` (core)** is **domain-agnostic**: the method loop, the 8 scientist-roles, the integrity rules, and a typed **cache engine** (`lib/pcache.py` query · `lib/pbuild.py` build · `lib/pvalidate.py` the 11 contract gates). It runs the scientific method on *any* field, with no pack installed.
+- **Domain packs** (`packs/<id>`) make it a fluent **expert** co-scientist on one field — a domain-expert agent, a `<id>-data` retrieval skill, a provenance-stamped cache, an oracle at a declared capability **tier**, and a domain eval suite. Shipped: **`lvk`** (ground-based gravitational waves — the "Siren" pack, tier **LIVE**) and **`pta`** (pulsar timing arrays, tier **REDERIVE**).
 
 ```
-/plugin marketplace add <your-repo-url>
-/plugin install praxis@praxis
-```
-
-## Use
-
-```
+/init lvk    # one-time: caches the plugin + pack into memory -> a fluent LVK co-scientist
+/quick most massive black hole merger so far
 /investigate "Is GW190814's secondary a neutron star or a black hole?"
-/event GW150914
 ```
 
-Or just ask a scientific question — the `scientific-method` skill triggers and the principal-investigator routes the loop.
+## Integrity, with teeth (and honest about its limits)
+
+Cache integrity is **mechanically enforced**: `pvalidate.py` gates certify each pack's cache is complete, DOI-resolvable, uncertainty-bearing, and scope-landable; `pcache.py`'s serving filter refuses to emit a bare number or a value without provenance. The **oracle tier** is a hard capability, not a label: **LIVE** packs are diffable against an independent API; **REDERIVE** packs are byte-match re-derivable but carry no live oracle and, until a human audit, are flagged *community-unverified*; **ASSERTED** fields get the method + discipline but not the mechanical guarantee. Tier-1 deep-loop generation is **eval-gated, not categorically guaranteed** — the honest scope is stated in `ARCHITECTURE.md`.
 
 ## The lab (roles → agents)
 
-`principal-investigator` orchestrates · `literature-reader` reads papers · `domain-expert-gw` supplies GW physics · `analyst-coder` runs reproducible analysis · `interpreter` turns numbers into meaning · `skeptic` tries to break the result · `cross-domain-bridge` connects fields · `teacher` explains at any level · `next-steps` maps the forward agenda.
+`principal-investigator` orchestrates · `literature-reader` reads papers · `domain-expert-<id>` supplies field physics (from the active pack) · `analyst-coder` runs reproducible analysis · `interpreter` turns numbers into meaning · `skeptic` tries to break the result · `cross-domain-bridge` connects fields · `teacher` explains at any level · `next-steps` maps the forward agenda.
 
-## Skills
+## Docs
 
-`scientific-method` (the master loop) · `paper-reading` · `gwosc-data` (real LVK/GWOSC v2 access) · `simulation-based-inference` (when SBI beats sampling, and how to validate it). Extend during the sprint with `gw-parameter-estimation`, `gw-populations`, `multimessenger`, `uncertainty-and-systematics`, `science-communication`.
+- `INSTALL.md` — install, `/init`, usage
+- `ARCHITECTURE.md` — the full typed core/pack contract, oracle tiers, and the honest limits
+- `docs/index.html` — the single-page documentation site (GitHub Pages)
 
-## Non-negotiables
+## Add a domain
 
-`rules/scientific-integrity.md`: no fabricated numbers, retrieve don't recall, always carry uncertainty, separate measurement / inference / speculation, cite real sources, the skeptic pass is mandatory, reproducibility, and it's allowed to conclude the data doesn't answer the question.
-
-## Beyond GW
-
-Siren is the reference instantiation. To target another data-driven field, add a `domain-expert-<field>` agent and a few domain skills (data access + method + conventions). The method loop and the integrity rules are domain-agnostic — that's the point.
+`/praxis-build <domain>` runs the transactional two-phase bootstrap and stamps out a validated `packs/<id>`. The method loop and integrity rules are domain-agnostic — that's the point.
 
 ---
-*Prototype scaffold · polygrav · Anthropic–ETH AI Sprint, 18 June 2026.*
+*polygrav · Anthropic–ETH AI Sprint.*

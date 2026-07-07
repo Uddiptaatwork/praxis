@@ -61,3 +61,6 @@ Thumbs.db
 .vscode/
 *.swp
 *~
+
+# Praxis runtime state (active pack marker)
+.praxis/

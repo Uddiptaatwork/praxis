@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "praxis-core://sota.schema.json/1.0",
+  "title": "Praxis pack SOTA citation index (sota.json)",
+  "type": "object",
+  "required": ["_meta", "papers"],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "required": ["retrieved_utc", "corpus_license"],
+      "properties": {
+        "retrieved_utc": {"type": "string"},
+        "corpus_version": {"type": "string"},
+        "corpus_license": {"type": "string"}
+      }
+    },
+    "papers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "doi", "title", "my_characterization", "asserted_utc"],
+        "properties": {
+          "id": {"type": "string"},
+          "doi": {"type": ["string", "null"]},
+          "source_license": {"type": "string"},
+          "title": {"type": "string"},
+          "my_characterization": {"type": "string"},
+          "status": {"type": "string"},
+          "asserted_utc": {"type": "string"},
+          "valid_until_release": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,28 +1,31 @@
 ---
-name: gwosc-data
-description: How to fetch real gravitational-wave data from the LVK / GWOSC public archive — event catalogs, parameter-estimation summaries, and strain. Use BEFORE answering ANY question that names a GW event (e.g. "GW190521's masses", "GW230529", any GW######_###### id), names a GWTC catalog (GWTC-1…GWTC-5.0 or the umbrella GWTC), poses a superlative about events ("largest / most massive / heaviest / closest / most distant / farthest / highest-SNR / first … in GWTC-N"), or requests an event's masses / distance / spins / SNR / redshift — even when the user did NOT type /event or /investigate. Trigger on the bare question itself, not only inside a command, so the answer comes from the live API with DOI provenance rather than recalled values. Endpoints are public, no-auth, and CORS-enabled.
+name: lvk-data
+description: How to fetch real ground-based gravitational-wave data from the LVK / GWOSC public archive — event catalogs, parameter-estimation summaries, and strain. Use BEFORE answering ANY question that names a GW event (e.g. "GW190521's masses", "GW230529", any GW######_###### id), names a GWTC catalog (GWTC-1…GWTC-5.0 or the umbrella GWTC), poses a superlative about events ("largest / most massive / heaviest / closest / most distant / farthest / highest-SNR / first … in GWTC-N"), or requests an event's masses / distance / spins / SNR / redshift — even when the user did NOT type /event or /investigate. Trigger on the bare question itself, not only inside a command, so the answer comes from the cited snapshot / live API with DOI provenance rather than recalled values. Endpoints are public, no-auth, and CORS-enabled. Oracle tier LIVE.
 ---
 
-# GWOSC data access
+# LVK / GWOSC data access (tier LIVE)
 
 The Gravitational Wave Open Science Center hosts the public LVK data. The v2 API is public, requires no authentication, and is CORS-enabled (fetchable from a browser app or `curl` or the `gwosc` Python client). Always retrieve real values here rather than recalling them.
 
 ## Local snapshot first (the fast path) — use this before any live call
 
-A frozen mirror of the cumulative `GWTC` catalog ships at `skills/gwosc-data/data/gwtc_snapshot.json` (all 391 events: catalog-level parameters with asymmetric errors, per-catalog DOIs, and a `retrieved_utc` timestamp). It is **retrieved data with provenance, not recalled values** — so it satisfies the integrity rules ("retrieve, don't recall"; "identifiers are retrieved"). Catalog data changes *only* when a new GWTC release is published, so the snapshot answers the overwhelming majority of questions with **zero network calls and in seconds** — no paging, no summarizing fetch.
+A frozen mirror of the cumulative `GWTC` catalog ships at `packs/lvk/cache/gwtc_snapshot.json` (all 391 events: catalog-level parameters with asymmetric errors, per-catalog DOIs, and a `retrieved_utc` timestamp). It is **retrieved data with provenance, not recalled values** — so it satisfies the integrity rules ("retrieve, don't recall"; "identifiers are retrieved"). Catalog data changes *only* when a new GWTC release is published, so the snapshot answers the overwhelming majority of questions with **zero network calls and in seconds** — no paging, no summarizing fetch.
 
-For any single-event lookup, count, or superlative, call the query helper. It prints `best +upper/-lower` with units and provenance (catalog + DOI + snapshot date):
+For any single-event lookup, count, or superlative, call the shared core query engine `lib/pcache.py` against this pack's cache. It prints `best +upper/-lower` with units and provenance (catalog + DOI + snapshot date), through the Tier-0 serving filter (no bare numbers, no missing provenance):
 
 ```bash
-python skills/gwosc-data/query_snapshot.py event GW150914           # one event's parameters
-python skills/gwosc-data/query_snapshot.py count                    # cumulative event count
-python skills/gwosc-data/query_snapshot.py count --catalog GWTC-5.0
-python skills/gwosc-data/query_snapshot.py max total_mass_source    # most massive (cumulative)
-python skills/gwosc-data/query_snapshot.py max total_mass_source --catalog GWTC-5.0
-python skills/gwosc-data/query_snapshot.py min luminosity_distance  # closest
-python skills/gwosc-data/query_snapshot.py catalogs                 # catalogs + DOIs + counts
-python skills/gwosc-data/query_snapshot.py meta                     # provenance / snapshot age
+C=packs/lvk/cache/gwtc_snapshot.json
+python lib/pcache.py entity GW150914 --cache $C          # one event's parameters (alias: event)
+python lib/pcache.py count --cache $C                    # cumulative event count
+python lib/pcache.py count --catalog GWTC-5.0 --cache $C
+python lib/pcache.py max total_mass_source --cache $C    # most massive (cumulative)
+python lib/pcache.py max total_mass_source --catalog GWTC-5.0 --cache $C
+python lib/pcache.py min luminosity_distance --cache $C  # closest
+python lib/pcache.py catalogs --cache $C                 # catalogs + DOIs + counts
+python lib/pcache.py meta --cache $C                     # provenance / snapshot age
 ```
+
+The active pack's cache path is auto-resolvable (`PRAXIS_CACHE` / `.praxis/active`), so `--cache` can be omitted once the pack is active.
 
 Natural-language → command:
 - "how big / most massive / heaviest" → `max total_mass_source` (or `max mass_1_source`); "smallest / lightest" → `min total_mass_source`
@@ -39,7 +42,7 @@ Add `--json` for machine output (analyst-coder). The superlative scope rule belo
 - a catalog DOI is empty (`GWTC-2.1-confident`, `GWTC-3-confident`) and full per-event provenance is required — one `event-versions/<NAME>-vN` fetch fills it;
 - the user explicitly asks to re-verify against the live catalog.
 
-When you do go live, use `curl` / the `gwosc` client (deterministic) — **not** a summarizing fetch — and never request the same endpoint twice. **Refresh** the snapshot when a new GWTC release is published: `python skills/gwosc-data/build_snapshot.py`.
+When you do go live, use `curl` / the `gwosc` client (deterministic) — **not** a summarizing fetch — and never request the same endpoint twice. **Refresh** the snapshot when a new GWTC release is published: `python packs/lvk/cache/build.py` (a thin shim over `lib/pbuild.py`).
 
 ## Python client (preferred for analysis)
 

@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('packs/praxis-pta/cache/pta_snapshot.json'\\)\\); print\\(list\\(d.keys\\(\\)\\)\\); print\\(d['_meta']\\)\")",
+      "Bash(curl -s \"https://gwosc.org/api/v2/catalogs/GWTC-2.1-confident\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('doi:', repr\\(d.get\\('doi'\\)\\), '| name:', d.get\\('name'\\)\\)\")",
+      "Bash(curl -s \"https://gwosc.org/api/v2/catalogs/GWTC-3-confident\")",
+      "Bash(curl -s \"https://gwosc.org/api/v2/catalogs\")",
+      "Bash(python3 /private/tmp/claude-501/-Users-ubhardwaj-work-anthropic-ethai-hackathon-praxis/dddd2b1e-307d-450b-ba44-fe5fbea05791/scratchpad/migrate_gw.py)",
+      "Bash(python3 lib/pcache.py entity GW150914 --cache packs/lvk/cache/gwtc_snapshot.json)",
+      "Bash(python3 lib/pcache.py max total_mass_source --cache packs/lvk/cache/gwtc_snapshot.json)",
+      "Bash(python3 lib/pcache.py entity NANOGrav-15yr --cache packs/pta/cache/pta_snapshot.json)",
+      "Bash(python3 lib/pcache.py entity GW999999 --cache packs/lvk/cache/gwtc_snapshot.json)",
+      "Bash(python3 lib/pcache.py catalogs --cache packs/lvk/cache/gwtc_snapshot.json)",
+      "Bash(python3 lib/pcache.py max total_mass_source --cache packs/pta/cache/pta_snapshot.json --max-age-days 1)",
+      "Bash(python3 lib/pvalidate.py packs/lvk)",
+      "Bash(python3 -c \"import json;d=json.load\\(open\\('packs/pta/pack.json'\\)\\);print\\('sota:',json.dumps\\(d.get\\('sota'\\)\\)\\);print\\('oracle:',json.dumps\\(d.get\\('oracle'\\)\\)\\);print\\('corpus_license:',d.get\\('corpus_license'\\)\\)\")",
+      "Bash(python3 packs/pta/cache/build.py)",
+      "Bash(cp packs/pta/cache/pta_snapshot.json /tmp/pta_run1.json)",
+      "Bash(git rm *)",
+      "Bash(python3 lib/pvalidate.py packs/pta)",
+      "Bash(python3 lib/memory_prime.py lvk)",
+      "Bash(grep -E '^\\\\- \\\\`[a-z-]+\\\\`')",
+      "Bash(awk '/WRITE MEMORY FILE: praxis-method/{f=1} /END praxis-method/{f=0} f')",
+      "Bash(cat)",
+      "Bash(python3 lib/pack_resolver.py list)",
+      "Bash(PRAXIS_DOMAIN=lvk python3 lib/pack_resolver.py json)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('active:',d['active'],'| tier:',d['tier'],'| cache:',d['cache_path']\\)\")",
+      "Bash(PRAXIS_DOMAIN=lvk python3 lib/pcache.py max total_mass_source)",
+      "Bash(PRAXIS_DOMAIN=pta python3 lib/pcache.py entity NANOGrav-15yr)",
+      "Bash(PRAXIS_DOMAIN=pta python3 lib/pcache.py max A_gwb)",
+      "Bash(python3 lib/pvalidate.py packs/lvk packs/pta)"
+    ]
+  }
+}
