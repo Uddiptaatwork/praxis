@@ -30,7 +30,14 @@ repository-code: "https://github.com/Uddiptaatwork/praxis"
 license: MIT
 version: 0.1.0
 date-released: "2026-10-12"
-# doi: "10.5281/zenodo.XXXXXXX" # add the concept DOI after the first Zenodo release
+doi: "10.5281/zenodo.23316452"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23316452"
+    description: "Concept DOI: all versions, resolves to the latest release"
+  - type: doi
+    value: "10.5281/zenodo.23316453"
+    description: "Version DOI for v0.1.0"
 keywords:
   - scientific-method
   - data-driven-science

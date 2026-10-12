@@ -1,5 +1,7 @@
 # Praxis
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23316452.svg)](https://doi.org/10.5281/zenodo.23316452)
+
 **The natural scientist's harness for Claude.** Everything-Claude-Code, but the operator is an ideal natural scientist instead of a software engineer.
 
 Most "AI for science" turns the model into a single oracle you ask for an answer. Praxis instead configures Claude as a small lab that runs the **scientific method** explicitly: frame a falsifiable question, establish background from real literature, get the method right, compute on real data, interpret, *try to break the result*, connect it across fields, and map what to do next. The result is an investigation with provenance and uncertainty — not a confident paragraph.
@@ -35,7 +37,7 @@ Cache integrity is **mechanically enforced**: `pvalidate.py` gates certify each 
 
 ## Citing Praxis
 
-If you use Praxis, please cite it via the metadata in [`CITATION.cff`](CITATION.cff) (GitHub's "Cite this repository" button generates BibTeX/APA from it). Archived releases and DOIs are on Zenodo.
+If you use Praxis, please cite it via the metadata in [`CITATION.cff`](CITATION.cff) (GitHub's "Cite this repository" button generates BibTeX/APA from it). Archived releases are on Zenodo under the concept DOI [10.5281/zenodo.23316452](https://doi.org/10.5281/zenodo.23316452), which always resolves to the latest version.
 
 ## AI use
 
