@@ -29,7 +29,7 @@ authors:
 repository-code: "https://github.com/Uddiptaatwork/praxis"
 license: MIT
 version: 0.1.0
-# date-released: "YYYY-MM-DD"   # set to the release date
+date-released: "2026-10-12"
 # doi: "10.5281/zenodo.XXXXXXX" # add the concept DOI after the first Zenodo release
 keywords:
   - scientific-method

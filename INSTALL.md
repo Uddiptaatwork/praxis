@@ -5,7 +5,7 @@
 Praxis is a **core plugin + domain packs**. Install the core, then one or more packs.
 
 ```
-/plugin marketplace add https://github.com/<you>/praxis
+/plugin marketplace add https://github.com/Uddiptaatwork/praxis
 /plugin install praxis@praxis          # the domain-agnostic core
 /plugin install praxis-lvk@praxis      # ground-based gravitational waves (Siren)
 /plugin install praxis-pta@praxis      # pulsar timing arrays (optional)
