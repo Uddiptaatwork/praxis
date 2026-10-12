@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "praxis-core://pack.schema.json/1.0",
+  "title": "Praxis domain-pack manifest (pack.json)",
+  "type": "object",
+  "required": ["praxis_contract", "domain", "expert_agent", "data_skill", "cache", "oracle"],
+  "properties": {
+    "praxis_contract": {"type": "string", "pattern": "^1\\."},
+    "domain": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+        "title": {"type": "string"},
+        "band": {"type": "string"},
+        "depends": {"type": "object"}
+      }
+    },
+    "expert_agent": {"type": "string"},
+    "data_skill": {"type": "string"},
+    "expert_attestation": {"type": ["object", "null"]},
+    "corpus_license": {"type": "string"},
+    "cache": {
+      "type": "object",
+      "required": ["path", "entity_kind", "id_field", "cumulative_scope", "record_params"],
+      "properties": {
+        "path": {"type": "string"},
+        "entity_kind": {"type": "string", "enum": ["event", "release", "pulsar", "sample", "object"]},
+        "id_field": {"type": "string"},
+        "cumulative_scope": {"type": "string"},
+        "supersede_rule": {"type": "string", "enum": ["replace", "complement"]},
+        "display_order": {"type": "array", "items": {"type": "string"}},
+        "record_params": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "sources": {"type": "object"},
+    "oracle": {
+      "type": "object",
+      "required": ["adapter", "tier", "kind", "checks"],
+      "properties": {
+        "adapter": {"type": "string"},
+        "tier": {"type": "string", "enum": ["LIVE", "REDERIVE", "ASSERTED"]},
+        "kind": {"type": "string"},
+        "transcription_audit": {"type": ["object", "null"]},
+        "checks": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "sota": {"type": "object"},
+    "conventions": {"type": "object"},
+    "skeptic_threats": {"type": "array"},
+    "measured_vs_inferred": {"type": "object"},
+    "open_limits": {"type": "array"},
+    "bridges": {"type": "array"},
+    "version": {"type": "string"}
+  }
+}

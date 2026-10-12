@@ -1,0 +1,14 @@
+Here are the **source-frame component masses** of GW190521 at 90% credible intervals:
+
+| Parameter | Median | 90% CI |
+|---|---|---|
+| m₁ (primary) | **98.4 M☉** | +33.6 / −21.7 M☉ |
+| m₂ (secondary) | **57.2 M☉** | +27.1 / −30.1 M☉ |
+| M_total | 153.1 M☉ | +42.2 / −16.2 M☉ |
+| M_chirp | 63.3 M☉ | +19.6 / −14.6 M☉ |
+
+Both components lie in the **pair-instability mass gap** (roughly 60–130 M☉), making GW190521 a landmark event.
+
+**Source:** GWTC-2.1-confident, event version GW190521_030229-v4  
+**DOI:** https://doi.org/10.7935/qf3a-3z67  
+Snapshot retrieved 2026-06-18 from GWOSC public API v2.

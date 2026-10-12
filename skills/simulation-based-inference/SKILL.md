@@ -5,7 +5,7 @@ description: When and how to use simulation-based inference (SBI / likelihood-fr
 
 # Simulation-based inference
 
-SBI estimates a posterior from a simulator instead of an explicit likelihood. In GW work it shines for amortized PE (train once, infer on many events fast), intractable-likelihood problems, and population inference. It is powerful and easy to fool yourself with — validation is not optional.
+SBI estimates a posterior from a simulator instead of an explicit likelihood. It shines for amortized inference (train once, infer on many datasets fast), intractable-likelihood problems, and population/hierarchical inference. It is powerful and easy to fool yourself with — validation is not optional.
 
 ## When SBI is the right tool
 

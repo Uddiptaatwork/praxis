@@ -1,0 +1,19 @@
+I wasn't granted network access, so I'll answer from training data — these numbers are from the published GWTC-2 catalog and the GW190521 properties paper (Abbott et al. 2020).
+
+**GW190521 — Source-frame component masses (90% credible intervals)**
+
+| Parameter | Value |
+|---|---|
+| Primary mass $m_1$ | $85.4^{+21.0}_{-14.2}\ M_\odot$ |
+| Secondary mass $m_2$ | $66.0^{+17.0}_{-18.3}\ M_\odot$ |
+
+Both components fall in the pair-instability supernova mass gap (~65–135 $M_\odot$), making GW190521 notable as the first BBH merger with both components in that gap. The remnant (~142 $M_\odot$) is the first direct observation of an intermediate-mass black hole.
+
+**Cite / verify at GWOSC:**
+> LIGO-Virgo GWTC-2 event catalog, GW190521 entry:
+> https://gwosc.org/eventapi/html/GWTC-2/GW190521/
+
+The primary reference is:
+> Abbott et al. (2020), *Properties and Astrophysical Implications of the 150 $M_\odot$ Binary Black Hole Merger GW190521*, ApJL 900, L13. [arXiv:2009.01190](https://arxiv.org/abs/2009.01190)
+
+**Note:** I could not live-fetch GWOSC to confirm the exact digits — please check the link above to verify, as parameter estimates can be updated between catalog releases (e.g., GWTC-2 vs. GWTC-2.1).

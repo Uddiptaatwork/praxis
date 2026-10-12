@@ -1,0 +1,14 @@
+Here are the component masses of **GW230529** (full id: GW230529_181500) at 90% credible intervals:
+
+| Parameter | Value |
+|---|---|
+| **m₁** (primary, source-frame) | **3.66 +0.82/−1.21 M☉** |
+| **m₂** (secondary, source-frame) | **1.42 +0.60/−0.22 M☉** |
+| Chirp mass | 1.94 ± 0.04 M☉ |
+| Total mass | 5.08 +0.61/−0.60 M☉ |
+
+The mass ratio places m₂ squarely in the neutron-star range and m₁ in the lower mass gap (roughly 2.5–5 M☉), making this event notable as a likely NS–mass-gap-object merger.
+
+**Source:** GWTC-4.1, version 3, single-detector (LIGO Livingston, O4a)
+**DOI:** https://doi.org/10.7935/6xqf-ba54
+Snapshot retrieved: 2026-06-18T14:05:03Z

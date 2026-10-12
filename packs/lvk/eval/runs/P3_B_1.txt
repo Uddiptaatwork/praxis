@@ -1,0 +1,16 @@
+Here are the component masses of **GW230529** (full ID: GW230529_181500) at 90% credible intervals:
+
+| Parameter | Value |
+|---|---|
+| **Primary mass** `m₁` | **3.66 +0.82/−1.21 M☉** |
+| **Secondary mass** `m₂` | **1.42 +0.60/−0.22 M☉** |
+| **Chirp mass** `ℳ` | 1.94 ± 0.04 M☉ |
+| **Total mass** | 5.08 +0.61/−0.60 M☉ |
+
+All masses are in the **source frame**.
+
+The mass ratio places m₁ squarely in the **lower mass gap** (~3–5 M☉, between the heaviest known neutron stars and the lightest stellar-mass black holes), making GW230529 particularly notable — the primary is most likely a black hole in that poorly understood gap, while the secondary is consistent with a neutron star.
+
+**Source:** GWTC-4.1, version 3
+**DOI:** https://doi.org/10.7935/6xqf-ba54
+**Snapshot retrieved:** 2026-06-18

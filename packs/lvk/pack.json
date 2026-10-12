@@ -1,0 +1,105 @@
+{
+  "praxis_contract": "1.0",
+  "domain": {
+    "id": "lvk",
+    "title": "Ground-based Gravitational Waves (LVK)",
+    "band": "audio-band gravitational waves (10 Hz – few kHz)",
+    "depends": { "praxis-core": ">=1.0 <2.0" }
+  },
+
+  "expert_agent": "agents/domain-expert-lvk.md",
+  "data_skill": "skills/lvk-data/SKILL.md",
+  "expert_attestation": null,
+  "corpus_license": "citation-index-only",
+
+  "cache": {
+    "path": "cache/gwtc_snapshot.json",
+    "schema": "praxis-core://cache.schema.json/1.0",
+    "entity_kind": "event",
+    "id_field": "name",
+    "id_aliases": true,
+    "cumulative_scope": "GWTC",
+    "supersede_rule": "replace",
+    "display_order": ["chirp_mass_source", "total_mass_source", "mass_1_source", "mass_2_source",
+      "final_mass_source", "chi_eff", "final_spin", "luminosity_distance", "redshift",
+      "network_matched_filter_snr", "far", "p_astro"],
+    "record_params": ["total_mass_source", "mass_1_source", "mass_2_source", "chirp_mass_source",
+      "final_mass_source", "luminosity_distance", "redshift", "network_matched_filter_snr"]
+  },
+
+  "sources": {
+    "primary": [
+      { "name": "GWTC-4.1", "kind": "gwosc", "doi": "https://doi.org/10.7935/6xqf-ba54",
+        "license": "CC-BY-4.0", "access": "live-api",
+        "source_fetched": "GWOSC v2 API https://gwosc.org/api/v2/catalogs/GWTC-4.1" },
+      { "name": "GWTC-5.0", "kind": "gwosc", "doi": "https://doi.org/10.7935/bk00-6a89",
+        "license": "CC-BY-4.0", "access": "live-api",
+        "source_fetched": "GWOSC v2 API https://gwosc.org/api/v2/catalogs/GWTC-5.0" },
+      { "name": "GWTC-1-confident", "kind": "gwosc", "doi": "https://doi.org/10.7935/82H3-HH23",
+        "license": "CC-BY-4.0", "access": "live-api",
+        "source_fetched": "GWOSC v2 API https://gwosc.org/api/v2/catalogs/GWTC-1-confident" }
+    ],
+    "live_api": "https://gwosc.org/api/v2",
+    "latest_release_probe": "https://gwosc.org/api/v2/catalogs/GWTC/events",
+    "clients": ["gwosc", "gwpy", "bilby", "pycbc", "sbi"]
+  },
+
+  "oracle": {
+    "adapter": "oracle/lvk_oracle.py",
+    "tier": "LIVE",
+    "kind": "live-api",
+    "transcription_audit": null,
+    "checks": ["entity_exists", "param_within_sigma", "scope_resolved", "identifier_resolves"]
+  },
+
+  "sota": {
+    "path": "cache/sota.json",
+    "schema": "praxis-core://sota.schema.json/1.0",
+    "refresh": { "trigger": "new-GWTC-release", "cadence_hint": "P1Y", "hard_expiry": "P3Y" }
+  },
+
+  "conventions": {
+    "frames": [
+      "source-frame vs detector-frame masses (redshifted): report source-frame unless asked",
+      "GPS time; GWOSC event naming GWYYMMDD_hhmmss with a version vN",
+      "numbered GWTC catalogs are per-observing-run SEGMENTS; only the umbrella GWTC is cumulative",
+      "chirp mass is the tightest-measured mass combination; individual masses are broader"
+    ],
+    "identifier_formats": { "event": "GW\\d{6}(_\\d{6})?", "catalog": "GWTC-\\d(?:\\.\\d)?" },
+    "asymmetric_errors": true,
+    "scope_trap": "A superlative within a numbered GWTC-N release is NOT the cumulative answer: GWTC-N is one run, not the whole catalog. Resolve every 'so far / ever / most / largest' against the umbrella GWTC catalog, and report both the cumulative and the named-release answer. (Canonical: GW231123_135430 ~236 M_sun is the cumulative most-massive but sits in GWTC-4.1/O4a, NOT GWTC-5.0.)"
+  },
+
+  "skeptic_threats": [
+    "waveform-model systematics (precession, higher modes, tidal terms for NS)",
+    "prior-dominated marginals (individual masses, spin tilt, inclination) vs well-measured (chirp mass)",
+    "selection effects: the detected population is not the astrophysical population",
+    "calibration uncertainty and detector glitches / non-Gaussian noise",
+    "single-detector localization is poor; network antenna patterns matter",
+    "source-frame vs detector-frame mass confusion; cosmology assumption in redshift"
+  ],
+
+  "measured_vs_inferred": {
+    "measured": ["strain time series", "matched-filter SNR", "GPS time", "detector network"],
+    "inferred_under_assumptions": ["source-frame masses", "spins", "luminosity distance",
+      "redshift (given a cosmology)", "sky location"],
+    "speculative": ["formation channel (field vs dynamical)", "IMBH / mass-gap membership",
+      "electromagnetic counterpart association without a confirmed transient"]
+  },
+
+  "open_limits": [
+    "individual component masses and spins are often prior-dominated",
+    "formation channels are not resolved from single-event parameters",
+    "the detected population requires selection-effect correction before astrophysical inference"
+  ],
+
+  "bridges": [
+    "cosmology: standard-siren H0 from BNS/dark-siren distances",
+    "nuclear physics: neutron-star equation of state from tidal deformability",
+    "fundamental physics: tests of GR, graviton mass, dispersion",
+    "multimessenger: EM/neutrino follow-up; PTA/LISA complementarity across the GW spectrum"
+  ],
+
+  "commands": ["commands/event.md"],
+  "version": "0.1.0"
+}

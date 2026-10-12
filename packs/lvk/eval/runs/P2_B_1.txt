@@ -1,0 +1,21 @@
+The live API confirms the snapshot values. Here are the results with full provenance:
+
+---
+
+**GW190521 — Source-Frame Component Masses (90% credible intervals)**
+
+| Parameter | Value |
+|---|---|
+| **m₁** (primary) | **98.4 +33.6/−21.7 M☉** |
+| **m₂** (secondary) | **57.2 +27.1/−30.1 M☉** |
+
+From the preferred PE run: `GWTC-2.1-confident_GW190521_R2_pe_combined` (waveform family `C01:Mixed`, LALInference).
+
+**Provenance**
+
+- Event: `GW190521_030229`, version 4, catalog `GWTC-2.1-confident`
+- Event-version DOI: https://doi.org/10.7935/qf3a-3z67
+- Posterior samples (Zenodo): https://doi.org/10.5281/zenodo.6513631
+- Retrieved live from GWOSC v2 API: `https://gwosc.org/api/v2/event-versions/GW190521-v4/parameters`
+
+GW190521 is notable for placing both components — and especially the primary — firmly in the **pair-instability mass gap** (~60–130 M☉), making it the most massive BBH detected at the time.

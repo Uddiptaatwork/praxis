@@ -1,0 +1,12 @@
+{
+  "name": "praxis-pta",
+  "version": "0.1.0",
+  "description": "Praxis domain pack for Pulsar Timing Arrays (nanohertz gravitational-wave background). Ships a provenance-stamped, re-derivable cache of the 2023 PTA GWB-evidence release set (NANOGrav 15yr, EPTA DR2) with IPTA DR2 cross-PTA context. Oracle tier REDERIVE: no live catalog API; values are served from a cited Zenodo/journal-DOI snapshot, never recalled.",
+  "author": { "name": "polygrav" },
+  "license": "MIT",
+  "keywords": [
+    "science", "scientific-method", "pulsar-timing-array", "pta",
+    "nanohertz-gravitational-waves", "nanograv", "epta", "ipta",
+    "gravitational-wave-background", "hellings-downs"
+  ]
+}

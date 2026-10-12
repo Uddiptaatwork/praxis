@@ -1,0 +1,18 @@
+I don't have web search access here, so I'll answer from my training data and cite the canonical GWOSC source.
+
+---
+
+For **GW150914**, the two source-frame component masses (black hole primary and secondary) with **90% credible intervals** are:
+
+| Parameter | Value |
+|---|---|
+| Primary mass m₁ | **35.6 ⁺⁴·⁸₋₃.₁ M☉** |
+| Secondary mass m₂ | **30.6 ⁺³·³₋₄.₄ M☉** |
+
+These are from the LVC parameter estimation results (Abbott et al. 2016, PRL 116, 061102), and are reproduced on the GWOSC event page.
+
+**Cite as:**  
+GWOSC event page for GW150914:  
+`https://gwosc.org/events/GW150914/`
+
+The parameter values there trace back to the discovery paper (Abbott et al. 2016) and the companion parameter estimation paper (Abbott et al. 2016, PRL 116, 241102). Note that later reanalyses (e.g., GWTC-1 and GWTC-2.1) produced slightly refined posteriors — if you need the most up-to-date values, the GWOSC catalog page at `https://gwosc.org/eventapi/` lists the current best estimates per event.

@@ -1,0 +1,12 @@
+**GW230529** (full id: GW230529_181500, catalog version 3) — component masses at 90% credible intervals:
+
+| Parameter | Value |
+|---|---|
+| **m₁** (primary, source frame) | **3.66 +0.82/−1.21 M☉** |
+| **m₂** (secondary, source frame) | **1.42 +0.60/−0.22 M☉** |
+| Chirp mass | 1.94 ± 0.04 M☉ |
+| Total mass | 5.08 +0.61/−0.60 M☉ |
+
+The mass ratio places GW230529 firmly in the **lower mass-gap** regime: the primary (~3.7 M☉) sits above the canonical NS maximum (~2.5 M☉) but below the lightest known stellar-mass BHs (~5 M☉), making it one of the most compelling NSBH candidates in the catalog.
+
+**Source:** GWTC-4.1, DOI: [10.7935/6xqf-ba54](https://doi.org/10.7935/6xqf-ba54). Retrieved from local GWOSC snapshot (2026-06-18). Single detector: LIGO Livingston (L1).

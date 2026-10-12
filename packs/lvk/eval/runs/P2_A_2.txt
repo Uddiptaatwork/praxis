@@ -1,0 +1,27 @@
+Web search wasn't permitted, so I'll answer from my training data, which covers the published GWOSC/GWTC-2 catalog values.
+
+---
+
+## GW190521 — Source-Frame Component Masses
+
+From the GWTC-2 catalog (Abbott et al. 2020, ApJL 900, L13), using the preferred NRSur7dq4 waveform model:
+
+| Parameter | Median | 90% Credible Interval |
+|---|---|---|
+| Primary mass *m*₁ | 85 M☉ | +21 / −14 M☉ |
+| Secondary mass *m*₂ | 66 M☉ | +17 / −18 M☉ |
+
+So:
+
+- **m₁ = 85⁺²¹₋₁₄ M☉**
+- **m₂ = 66⁺¹⁷₋₁₈ M☉**
+
+The primary mass falls squarely in the pair-instability supernova gap (~60–130 M☉), making GW190521 exceptional. The final remnant mass is ~142 M☉ (the first unambiguous intermediate-mass black hole from a merger).
+
+---
+
+**GWOSC citation:**
+
+> LIGO Scientific Collaboration, Virgo Collaboration (2020). *GW190521 event data and parameter estimates.* Gravitational Wave Open Science Center (GWOSC), GWTC-2. Available at **gwosc.org** (search "GW190521" in the event portal).
+
+The underlying discovery paper is Abbott et al. 2020, *Phys. Rev. Lett.* **125**, 101102, and the properties paper is Abbott et al. 2020, *ApJL* **900**, L13.

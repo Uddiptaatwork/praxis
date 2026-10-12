@@ -1,0 +1,18 @@
+I don't currently have permission to use web search or fetch tools in this session, so I can't retrieve live data from GWOSC.
+
+Here is what I know from my training data (knowledge cutoff August 2025):
+
+**GW230529** is a compact binary merger detected on 2023 May 29. It is notable because the secondary component's mass falls in the **lower mass gap** (between the heaviest known neutron stars and lightest known black holes). Based on the discovery paper (Abac et al. 2024, *ApJL* 970, L34) and the associated GWOSC catalog entry, the component masses at 90% credibility are approximately:
+
+| Parameter | Median | 90% CI |
+|-----------|--------|--------|
+| Primary mass *m*₁ (M☉) | ~3.6 | ~2.5–4.5 |
+| Secondary mass *m*₂ (M☉) | ~1.5 | ~1.2–2.0 |
+
+**However, I cannot guarantee these numbers are exact**, and the credible intervals depend on the waveform model used. You should retrieve the authoritative values directly from:
+
+> **GWOSC event page:** `https://gwosc.org/eventapi/html/GWTC-3-confident/GW230529/`
+
+That page lists the median and 90% CI for both component masses (and other parameters) for each available posterior sample set, along with DOIs for the data releases.
+
+To get the exact numbers, please allow the WebFetch tool and I can pull them directly from GWOSC for you.

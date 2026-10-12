@@ -1,0 +1,11 @@
+{
+  "name": "praxis-lvk",
+  "version": "0.1.0",
+  "description": "Praxis domain pack for ground-based gravitational-wave astronomy (LIGO-Virgo-KAGRA / GWOSC). The flagship 'Siren' pack: a live-API (tier LIVE) GWTC event catalog with asymmetric uncertainties, per-catalog DOIs, and precomputed superlatives, served through the core cache engine. Turns Praxis into a fluent LVK co-scientist.",
+  "author": { "name": "polygrav" },
+  "license": "MIT",
+  "keywords": [
+    "gravitational-waves", "ligo", "virgo", "kagra", "lvk", "gwosc", "gwtc",
+    "compact-binary", "black-hole", "neutron-star", "scientific-method"
+  ]
+}

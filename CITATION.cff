@@ -5,8 +5,10 @@ title: "Praxis: the natural scientist's harness for Claude"
 abstract: >-
   Praxis configures large language models to do data-driven natural science
   as a small lab of specialist agents running an explicit, falsifiable
-  scientific method over real data. It ships Siren, a flagship
-  gravitational-wave domain pack built on public GWOSC data.
+  scientific method over real data. A domain-agnostic core (method loop,
+  scientist roles, integrity rules, and a provenance-stamped, mechanically
+  validated cache engine) is extended by domain packs; it ships packs for
+  ground-based gravitational waves (LVK) and pulsar timing arrays (PTA).
 authors:
   - family-names: Bhardwaj
     given-names: Uddipta
@@ -26,7 +28,7 @@ authors:
     # orcid: ""
 repository-code: "https://github.com/Uddiptaatwork/praxis"
 license: MIT
-version: 0.1.0
+version: 1.0.0
 # date-released: "YYYY-MM-DD"   # set to the release date
 # doi: "10.5281/zenodo.XXXXXXX" # add the concept DOI after the first Zenodo release
 keywords:
@@ -36,4 +38,5 @@ keywords:
   - agents
   - gravitational-waves
   - gwosc
+  - pulsar-timing-arrays
   - simulation-based-inference

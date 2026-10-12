@@ -1,0 +1,19 @@
+I don't have web search access in this session to pull live data from GWOSC. Here's what I know from my training data (knowledge cutoff August 2025):
+
+**GW230529** is a compact binary merger detected on 2023 May 29, announced by the LIGO–Virgo–KAGRA collaboration in 2024. It is notable because one component falls in the **lower mass gap** (roughly 3–5 M☉), making it ambiguous whether it is a neutron star or black hole.
+
+The reported component masses (90% credible intervals) are:
+
+| Component | Mass (M☉) |
+|-----------|-----------|
+| Primary (m₁) | 3.6⁺⁰·⁸₋₀.₅ |
+| Secondary (m₂) | 1.4⁺⁰·⁶₋₀.₂ |
+
+These are **source-frame masses** under the low-spin prior. The primary sits in the lower mass gap and could be either a very massive neutron star or a light black hole; the secondary is consistent with a neutron star.
+
+**Caveat:** I cannot guarantee these figures are exactly as stated on the current GWOSC event page, and the exact interval boundaries may differ slightly from what I have in training. You should verify directly at:
+
+> **GWOSC event page:** `https://gwosc.org/eventapi/html/GWTC-4-confident/GW230529/`  
+> **Discovery paper:** Abbott et al. 2024, ApJL 970 L34 (arXiv:2404.04248)
+
+The GWOSC catalog browser at `gwosc.org/catalog` will give the authoritative credible intervals from the official parameter estimation samples.

@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""Thin build shim for the ${ID} pack -- config only; machinery lives in lib/pbuild.py."""
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "..", "lib"))
+import pbuild  # noqa: E402
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(HERE, "${CACHE_BASENAME}")
+
+# LIVE-paged packs: supply events_url + entity_from_row.
+# REDERIVE/transcribed packs: supply entities={...} transcribed from the cited table.
+if __name__ == "__main__":
+    pbuild.build(
+        domain="${ID}",
+        entity_kind="${ENTITY_KIND}",
+        cumulative_scope="${CUMULATIVE_SCOPE}",
+        record_params=${RECORD_PARAMS},
+        out=OUT,
+        builder_version="praxis-${ID}/0.1.0",
+        source="${SOURCE}",
+        # entities={...} OR events_url="...", entity_from_row=...
+    )

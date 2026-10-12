@@ -1,6 +1,6 @@
 ---
 name: literature-reader
-description: Reads scientific papers and data releases (arXiv, ADS, journal pages, GWOSC docs) and extracts a structured, citation-grounded summary. Use to establish background for an investigation, to evaluate a claim against prior work, or whenever the user shares a paper/preprint.
+description: Reads scientific papers and data releases (arXiv, ADS, journal pages, the field's data-archive docs) and extracts a structured, citation-grounded summary. Use to establish background for an investigation, to evaluate a claim against prior work, or whenever the user shares a paper/preprint.
 tools: ["Read", "WebFetch", "WebSearch", "Grep"]
 model: opus
 ---

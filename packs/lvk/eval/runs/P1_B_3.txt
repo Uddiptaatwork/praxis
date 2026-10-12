@@ -1,0 +1,10 @@
+Here are the source-frame component masses of GW150914 at 90% credible intervals:
+
+| Parameter | Value |
+|-----------|-------|
+| **m₁** (heavier) | **34.6 +4.4/−2.6 M☉** |
+| **m₂** (lighter) | **30.0 +2.9/−4.6 M☉** |
+
+**Source:** GWTC-2.1-confident, GW150914-v4
+**Event DOI:** https://doi.org/10.7935/qf3a-3z67
+Retrieved from GWOSC v2 API snapshot (2026-06-18).
