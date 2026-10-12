@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use Praxis in your work, please cite it using the metadata below."
+type: software
+title: "Praxis: the natural scientist's harness for Claude"
+abstract: >-
+  Praxis configures large language models to do data-driven natural science
+  as a small lab of specialist agents running an explicit, falsifiable
+  scientific method over real data. It ships Siren, a flagship
+  gravitational-wave domain pack built on public GWOSC data.
+authors:
+  - family-names: Bhardwaj
+    given-names: Uddipta
+    affiliation: "ETH Zurich"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: Vallisneri
+    given-names: Michele
+    # affiliation: ""
+    # orcid: ""
+  - family-names: Badaracco
+    given-names: Giada
+    # affiliation: ""
+    # orcid: ""
+  - family-names: Giarda
+    given-names: Giovanni
+    # affiliation: ""
+    # orcid: ""
+repository-code: "https://github.com/Uddiptaatwork/praxis"
+license: MIT
+version: 0.1.0
+# date-released: "YYYY-MM-DD"   # set to the release date
+# doi: "10.5281/zenodo.XXXXXXX" # add the concept DOI after the first Zenodo release
+keywords:
+  - scientific-method
+  - data-driven-science
+  - large-language-models
+  - agents
+  - gravitational-waves
+  - gwosc
+  - simulation-based-inference

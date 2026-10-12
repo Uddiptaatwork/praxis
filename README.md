@@ -36,5 +36,13 @@ Or just ask a scientific question — the `scientific-method` skill triggers and
 
 Siren is the reference instantiation. To target another data-driven field, add a `domain-expert-<field>` agent and a few domain skills (data access + method + conventions). The method loop and the integrity rules are domain-agnostic — that's the point.
 
+## Citing Praxis
+
+If you use Praxis, please cite it via the metadata in [`CITATION.cff`](CITATION.cff) (GitHub's "Cite this repository" button generates BibTeX/APA from it). Archived releases and DOIs are on Zenodo.
+
+## AI use
+
+Praxis was developed with the assistance of large language models: Anthropic's Claude and OpenAI's GPT models. All design decisions, content, and code were directed, reviewed, and are the responsibility of the human authors.
+
 ---
 *Prototype scaffold · polygrav · Anthropic–ETH AI Sprint, 18 June 2026.*
