@@ -1,6 +1,6 @@
 # Praxis
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23316452.svg)](https://doi.org/10.5281/zenodo.23316452)
+[![DOI](https://zenodo.org/badge/1273148739.svg)](https://doi.org/10.5281/zenodo.23316452)
 
 **The natural scientist's harness for Claude.** Everything-Claude-Code, but the operator is an ideal natural scientist instead of a software engineer.
 
